@@ -27,7 +27,7 @@
   import Breadcrumbs from "$lib/common/Breadcrumb.svelte";
   import { userData } from "$lib/helpers/store";
 
-  let subscribemodal = false;
+  export let subscribemodal: boolean;
   let userdata: any;
   $: userdata = $userData.user;
 

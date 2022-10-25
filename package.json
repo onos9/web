@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "vite dev --port 8080",
+		"start": "vite dev --port 8888",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -30,6 +30,7 @@
 		"@fullcalendar/daygrid": "^5.11.3",
 		"@fullcalendar/interaction": "^5.11.3",
 		"@fullcalendar/timegrid": "^5.11.3",
+		"@sveltejs/adapter-static": "^1.0.0-next.46",
 		"@woden/svelte-simplebar": "^1.0.0",
 		"axios": "^0.27.2",
 		"axios-mock-adapter": "^1.21.2",

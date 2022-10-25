@@ -2,6 +2,9 @@
   import type { Profile } from "$lib/interface/user_interface";
   import { Col, Form, FormGroup, Input, Label, Row } from "sveltestrap";
   export let profile: Profile;
+  let gender: string
+
+  $: profile.gender = gender;
 </script>
 
 {#if profile.id}
@@ -86,14 +89,14 @@
               <Input
                 id="r1"
                 type="radio"
-                bind:group={profile.gender}
+                bind:group={gender}
                 value="male"
                 label="Male"
               />
               <Input
                 id="r2"
                 type="radio"
-                bind:group={profile.gender}
+                bind:group={gender}
                 value="female"
                 label="Female"
               />

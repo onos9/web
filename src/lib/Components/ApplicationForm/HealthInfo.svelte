@@ -4,12 +4,9 @@
   import { Col, Form, FormGroup, Input, Label, Row } from "sveltestrap";
   export let profile: Profile;
   let disabled: boolean;
+  let healthConditions: string[] = [];
 
-  $: if (profile.id) {
-    profile.healthConditions = !profile.healthConditions
-      ? []
-      : profile.healthConditions;
-  }
+  $: profile.healthConditions = healthConditions
 </script>
 
 <div>
@@ -44,7 +41,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Disability"
                 id="defaultCheck1"
               />
@@ -56,7 +53,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Nervous illness"
                 id="defaultCheck1"
               />
@@ -68,7 +65,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Anorexia"
                 id="defaultCheck1"
               />
@@ -80,7 +77,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Had Surgery"
                 id="defaultCheck1"
               />
@@ -94,7 +91,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Diabetese"
                 id="defaultCheck1"
               />
@@ -106,7 +103,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Epilepsy"
                 id="defaultCheck1"
               />
@@ -118,7 +115,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Stomach Ulcer"
                 id="defaultCheck1"
               />
@@ -130,7 +127,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Drug Addiction"
                 id="defaultCheck1"
               />
@@ -144,7 +141,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Eat Special Diet"
                 id="defaultCheck1"
               />
@@ -156,7 +153,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Learning disability"
                 id="defaultCheck1"
               />
@@ -168,7 +165,7 @@
               <input
                 class="form-check-input"
                 type="checkbox"
-                bind:group={profile.healthConditions}
+                bind:group={healthConditions}
                 value="Used Illigal Drug"
                 id="defaultCheck1"
               />

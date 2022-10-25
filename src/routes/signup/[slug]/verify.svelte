@@ -17,7 +17,7 @@
     });
 
     response = resp.data?.verifyEmail;
-    if (!!resp.data) goto("/signup/program");
+    if (!!response) goto("/signup/program");
   };
 
   const handleKeyup = ({ target }) => {

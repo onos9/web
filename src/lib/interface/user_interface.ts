@@ -16,7 +16,7 @@ export interface Profile {
     progress: number
 
     // Spiritual Background
-    godsWorkings: []
+    godsWorkings: string[]
     salvationBrief: string
     churchName: string
     churchAddress: string

@@ -94,12 +94,6 @@
     localStorage.auth = JSON.stringify($auth);
   }
 
-  $: if (browser && !$userData.user.id) user.query("user", { id: $auth.cred?.id });
-  $: if ($userData.user.progress) {
-    // console.log($userData.user.progress)
-    // subscribemodal = !subscribemodal;
-  }
-
   $: if ($userData.user.id) {
     userdata = $userData.user;
     Object.keys(profile).forEach((key) => (profile[key] = userdata[key]));
@@ -110,6 +104,16 @@
     // if (browser)
     //   Object.keys(profile).forEach((key) => (profile[key] = userdata[key]));
   };
+  
+  $: if (browser && !$userData.user?.id) getUserData($auth.cred?.id);
+
+  const getUserData = async (id: string) => {
+    const resp = await user.query("user", { id });
+    if (resp?.data?.user?.progress < 100) {
+      subscribemodal = true;
+    }
+  };
+
 </script>
 
 {#if $userData.user?.id}
@@ -255,32 +259,31 @@
 
 {#if $userData.user.id}
   <Modal
-  size="xl"
-  isOpen={subscribemodal}
-  toggle={togglesubscribemodal}
-  backdrop="static"
-  centered
-  on:open={onModalOpen}
->
-  <div class="modal-content">
-    <div class="modal-header border-bottom-0">
-      <h5 class="modal-title">Edit Profile</h5>
-      <button
-        type="button"
-        class="btn-close"
-        on:click={togglesubscribemodal}
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      />
+    size="xl"
+    isOpen={subscribemodal}
+    toggle={togglesubscribemodal}
+    backdrop="static"
+    centered
+    on:open={onModalOpen}
+  >
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title">Edit Profile</h5>
+        <button
+          type="button"
+          class="btn-close"
+          on:click={togglesubscribemodal}
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        />
+      </div>
+      <div class="modal-body">
+        <Wizard bind:complete bind:nextTab bind:subscribemodal {titles}>
+          <PersonalInfo bind:profile slot="slot1" />
+          <SpiritBackground bind:profile slot="slot2" />
+          <HealthInfo bind:profile slot="slot3" />
+        </Wizard>
+      </div>
     </div>
-    <div class="modal-body">
-      <Wizard bind:complete bind:nextTab bind:subscribemodal {titles}>
-        <PersonalInfo bind:profile slot="slot1" />
-        <SpiritBackground bind:profile slot="slot2" />
-        <HealthInfo bind:profile slot="slot3" />
-      </Wizard>
-    </div>
-  </div>
-</Modal>
+  </Modal>
 {/if}
-

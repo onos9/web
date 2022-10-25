@@ -3,10 +3,9 @@
   import type { Profile } from "$lib/interface/user_interface";
   export let profile: Profile;
   let disabled: boolean;
+  let godsWorkings: string[] = [];
 
-  $: if (profile.id) {
-    profile.godsWorkings = !profile.godsWorkings ? [] : profile.godsWorkings;
-  }
+  $: profile.godsWorkings = godsWorkings
 </script>
 
 {#if profile.id}
@@ -42,7 +41,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Bourn Again"
                   id="defaultCheck1"
                 />
@@ -54,7 +53,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Holygost Baptism"
                   id="defaultCheck1"
                 />
@@ -66,7 +65,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Water Baptism"
                   id="defaultCheck1"
                 />
@@ -80,7 +79,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Speak in Tongues"
                   id="defaultCheck1"
                 />
@@ -92,7 +91,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Spiritual Gift"
                   id="defaultCheck1"
                 />
@@ -104,7 +103,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Involved with a Church"
                   id="defaultCheck1"
                 />
@@ -118,7 +117,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Called of God"
                   id="defaultCheck1"
                 />
@@ -130,7 +129,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Into Ministry"
                   id="defaultCheck1"
                 />
@@ -142,7 +141,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  bind:group={profile.godsWorkings}
+                  bind:group={godsWorkings}
                   value="Baptized"
                   id="defaultCheck1"
                 />
@@ -168,7 +167,7 @@
           </FormGroup>
         </Col>
       </Row>
-           <Row>
+      <Row>
         <Col lg="12">
           <FormGroup floating label="Reason for Applying">
             <textarea

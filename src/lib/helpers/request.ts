@@ -11,7 +11,7 @@ interface UserStore {
 }
 
 export const axiosPublic = axios.create({
-  baseURL: 'http://localhost:8000/query',
+  baseURL: 'https://api.adullam.ng/query',
   timeout: 15000,
   withCredentials: true,
 });
@@ -24,7 +24,7 @@ const refresh = gql`query{
         }`
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000/query',
+  baseURL: 'https://api.adullam.ng/query',
   timeout: 15000,
   withCredentials: true,
 });
@@ -96,7 +96,7 @@ export const request = async (path: string, query: string, variables: object) =>
     if (path === 'user' || path === 'users') {
       // console.log(path)
       userData.set({ [path]: data[path] } as UserStore)
-      return
+      return resp.data
     }
     return resp.data
 
