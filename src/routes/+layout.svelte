@@ -25,15 +25,6 @@
   let slug: string;
   $: slug = $page.params.slug;
 
-  if (browser) {
-    // Object.defineProperty(String.prototype, "capitalize", {
-    //   value: function () {
-    //     return this.charAt(0).toUpperCase() + this.slice(1);
-    //   },
-    //   enumerable: false,
-    // });
-  }
-
   onMount(() => {
     if (
       (browser && !publicRoutes.includes($page.url.pathname)) ||

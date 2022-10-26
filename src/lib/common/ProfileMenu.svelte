@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { _ } from "svelte-i18n";
   import {
     Dropdown,
@@ -6,11 +6,12 @@
     DropdownMenu,
     DropdownItem,
   } from "sveltestrap";
-  import { auth } from "$lib/helpers/store";
-  import { request } from "$lib/helpers/request";
-  import { goto } from "$app/navigation";
-
-  const handleLogOut = () => {};
+  import Auth from "$lib/graphql/auth";
+  export let user: any;
+  
+  const handleLogOut = async () => {
+    Auth.queryPublic("signOut", {});
+  };
 </script>
 
 <Dropdown class="dropdown d-inline-block">
@@ -20,11 +21,22 @@
     tag="button"
     color=""
   >
-    <img
+    {#if !!user && !user?.avatarUrl}
+      <div class="avatar-xs">
+        <span class="avatar-title rounded-circle">
+          {user?.fullName?.charAt(0)}
+        </span>
+      </div>
+    {:else}
+      <div>
+        <img class="rounded-circle avatar-xs" src={user?.avatarUrl} alt="" />
+      </div>
+    {/if}
+    <!-- <img
       class="rounded-circle header-profile-user"
       src="/assets/images/users/avatar-1.jpg"
       alt="Header Avatar"
-    />
+    /> -->
     <span class="d-none d-xl-inline-block ms-1"> Admin </span>
     <i class="mdi mdi-chevron-down d-none d-xl-inline-block" />
   </DropdownToggle>

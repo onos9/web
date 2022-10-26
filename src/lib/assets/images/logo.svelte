@@ -9,7 +9,7 @@ viewBox="0 0 7.22986 8.05536"
    <![CDATA[
     @font-face { font-family:"Constantia";src:url("#FontID0") format(svg)}
     .str1 {stroke:#FEFEFE;stroke-width:0.0166779}
-    .str0 {stroke:white;stroke-width:0.3}
+    .str0 {stroke:white;stroke-width:0.115826}
     .fil0 {fill:none}
     .fil1 {fill:#FEFEFE}
     .fil2 {fill:white}

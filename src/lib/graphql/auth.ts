@@ -8,6 +8,7 @@ export const query = {
         mutation($fullName: String! $email: String!, $password: String!, $role: String!){
             signUp(fullName:$fullName, email:$email, password:$password, role:$role){
                 id
+                email
                 createdAt
                 updatedAt
             }
@@ -17,20 +18,20 @@ export const query = {
         mutation($email: String!, $password: String!){
             signIn(email:$email, password:$password) { 
                 id
+                fullName
                 role
                 email
+                avatarUrl
                 token
                 tokenExpiredAt
-                username
                 progress
             }
         }`,
 
     signOut: gql`
-        mutation($email: String!, $password: String!){
-            signOut(email:$email, password:$password) { 
-                token
-                expiredAt
+        mutation{
+            logOut{
+                loggedIn
             }
         }`,
     verifyEmail: gql`
@@ -41,7 +42,7 @@ export const query = {
                 email
                 token
                 tokenExpiredAt
-                username
+                fullName
                 progress
             }
         }`,
@@ -50,11 +51,12 @@ export const query = {
         query{
             refresh{
                 id
+                fullName
                 role
                 email
+                avatarUrl
                 token
                 tokenExpiredAt
-                username
                 progress
             }
         }`,

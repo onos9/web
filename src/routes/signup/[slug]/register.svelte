@@ -23,8 +23,13 @@
 </script>
 
 <div>
-  <h5 class="text-primary text-center">Register account</h5>
-  <p class="text-muted text-center">Get your free Adullam account</p>
+  <h5 class="text-primary text-center">Sign Up</h5>
+  <p class="text-muted text-center">
+    Applicants should select <span class="text-primary"
+      >Prospective Student</span
+    >
+    as Account Type in order to gain access to the Application form
+  </p>
 </div>
 
 <div class="mt-4">

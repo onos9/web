@@ -167,7 +167,7 @@
         <div class="mt-5 text-center">
           <p>
             Don&apos;t have an account ?{" "}
-            <a href="signup/register" class="fw-medium text-primary">
+            <a href="/signup/register" class="fw-medium text-primary">
               {" "}
               Signup now{" "}
             </a>{" "}

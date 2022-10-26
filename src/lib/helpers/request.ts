@@ -126,7 +126,12 @@ export const publicRequest = async (query: string, variables: object) => {
 
     if (!!data?.signIn) {
       auth.set({ loggedIn: true, cred: data?.signIn })
-    } 
+    }
+    
+    if (!!data?.logOut) {
+      auth.set({ loggedIn: data?.logOut?.loggedIn, cred: {} })
+      goto("/login", { replaceState: true })
+    }
 
     if (!!data?.verifyEmail) {
       auth.set({ loggedIn: true, cred: data?.verifyEmail })

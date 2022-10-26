@@ -18,7 +18,6 @@
 
   $: if (browser && $auth.loggedIn) user.query("users", {});
   $: if (browser) data = $userData.users;
-
 </script>
 
 {#if $userData.users.length > 0}

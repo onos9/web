@@ -16,6 +16,11 @@
   import NotificationDropdown from "../../lib/common/NotificationDropdown.svelte";
   import ProfileMenu from "../../lib/common/ProfileMenu.svelte";
   import RightsidebarButton from "../../lib/Components/RightsidebarButton.svelte";
+  import { auth } from "$lib/helpers/store";
+  // import logoLightSvg from "$lib/assets/images/logo-light.svg?raw";
+  // import logoLightPng from "$lib/assets/images/logo-light.png";
+  // import logoSvg from "$lib/assets/images/logo.svg?raw";
+  // import logoDarkPng from "$lib/assets/images/logo-dark.png";
 
   interface FsDocument extends Document {
     mozFullScreenElement?: Element;
@@ -80,6 +85,8 @@
   }
 
   export let sidebar = false;
+  let user: {};
+  $: user = $auth.cred
 </script>
 
 <header id="page-topbar">
@@ -398,7 +405,7 @@
 
       <NotificationDropdown />
 
-      <ProfileMenu />
+      <ProfileMenu {user}/>
 
       <div class="dropdown d-inline-block">
         <RightsidebarButton bind:open={sidebar} />
