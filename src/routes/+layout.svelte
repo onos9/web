@@ -34,11 +34,11 @@
   });
 </script>
 
-{#if (!publicRoutes.includes($page.url.pathname) && $auth.loggedIn) || slug != "program"}
+{#if $auth.loggedIn}
   <svelte:component this={VerticalLayout}>
     <slot />
   </svelte:component>
-{:else}
+{:else if publicRoutes.includes($page.url.pathname)}
   <slot />
 {/if}
 
