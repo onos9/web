@@ -8,7 +8,7 @@
   let count = 2;
   let code: string = "";
   let lastDigit: string = "";
-  $: console.log(code + lastDigit);
+  // $: console.log(code + lastDigit);
 
   const handleClick = async () => {
     const resp = await Auth.queryPublic("verifyEmail", {

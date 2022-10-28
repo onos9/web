@@ -2,23 +2,38 @@
   import referee from "$lib/graphql/referee";
   import { auth } from "$lib/helpers/store";
   import { Col, Modal, Row, Table } from "sveltestrap";
+  export let complete: boolean;
+  export let alert: boolean;
+  export let isRef: boolean;
 
   let fullName: string;
   let phone: string;
   let email: string;
   let refs: any;
+  let refId: any;
 
   let isOpen = false;
   const toggle = () => (isOpen = !isOpen);
 
-  const handleSubmit = () => {
-    referee.query("create", {
+  $: alert = refs?.length < 2 && complete;
+  $: isOpen = isRef;
+
+  const handleSubmit = async () => {
+    const resp = await referee.query("create", {
       userId: $auth.cred?.id,
       fullName,
       phone,
       email,
     });
 
+    fullName = phone = email = "";
+    const { data } = await referee.query("referees", {
+      userId: $auth.cred?.id,
+    });
+
+    if (data.referees.length >= 2) {
+      console.log(data);
+    }
     isOpen = !isOpen;
   };
 
@@ -29,7 +44,7 @@
     refs = data.referees;
   };
 
-  $: if (!refs) getReferees();
+  $: if (!refs || refId) getReferees();
 </script>
 
 {#if refs}

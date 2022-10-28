@@ -3,6 +3,10 @@
   import Auth from "$lib/graphql/auth";
   import type { User } from "$lib/interface/user_interface";
   export let response: any;
+  let loading = false;
+  let isValid = true;
+  let regx =
+    '/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/';
 
   let user: User = {
     fullName: "",
@@ -12,9 +16,12 @@
   };
 
   const handleSubmit = async (e: any) => {
-    const resp = await Auth.queryPublic("signUp", user);
-    response = resp.data?.signUp;
-    if (!!resp.errors && resp.errors[0]?.message.includes("E11000")) {
+    // isValid = !!user.email.toLowerCase().match(regx);
+    if (isValid) {
+      response = await Auth.queryPublic("signUp", user);
+      response = response.data?.signUp;
+    }
+    if (!!response.errors && response.errors[0]?.message.includes("E11000")) {
       return;
     }
 
@@ -42,9 +49,8 @@
       <label for="">Account Type</label>
       <select bind:value={user.role} class="form-select">
         <option value="prospective">Prospective Student</option>
-        <option value="tutor">Tutor</option>
         <option value="partner">Partner</option>
-        <option value="guest">Guest</option>
+        <option value="staff">Staff</option>
       </select>
     </div>
     <hr />
@@ -64,14 +70,14 @@
     <div class="form-floating mb-3">
       <input
         type="email"
-        class="form-control"
+        class={`form-control ${isValid ? "" : "is-invalid"}`}
         id="email"
         placeholder="Enter email"
         bind:value={user.email}
         required
       />
-      <label for="useremail" class="form-label">Email</label>
-      <div class="invalid-feedback">Please Enter Email</div>
+      <label for="useremail" class="form-label"> Email </label>
+      <div class="invalid-feedback">Email address isValid</div>
     </div>
 
     <div class="form-floating mb-3">
@@ -96,45 +102,51 @@
     </div>
 
     <div class="mt-4 d-grid">
-      <button
-        class="btn btn-primary w-md waves-effect waves-light"
-        type="submit">Register</button
-      >
-    </div>
+      <button type="submit" class="btn btn-primary">
+        {#if loading}
+          <i class="bx bx-loader bx-spin font-size-16 align-middle me-2" />
+          Loading
+        {:else}
+          Register
+        {/if}
+      </button>
+      <div class="mt-4 text-center">
+        <h5 class="font-size-14 mb-3">Sign up using</h5>
 
-    <div class="mt-4 text-center">
-      <h5 class="font-size-14 mb-3">Sign up using</h5>
-
-      <ul class="list-inline">
-        <li class="list-inline-item">
-          <a
-            href={"#"}
-            class="social-list-item bg-primary text-white border-primary"
-          >
-            <i class="mdi mdi-facebook" />
-          </a>
-        </li>
-        <li class="list-inline-item">
-          <a href={"#"} class="social-list-item bg-info text-white border-info">
-            <i class="mdi mdi-twitter" />
-          </a>
-        </li>
-        <li class="list-inline-item">
-          <a
-            href={"#"}
-            class="social-list-item bg-danger text-white border-danger"
-          >
-            <i class="mdi mdi-google" />
-          </a>
-        </li>
-      </ul>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a
+              href={"#"}
+              class="social-list-item bg-primary text-white border-primary"
+            >
+              <i class="mdi mdi-facebook" />
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a
+              href={"#"}
+              class="social-list-item bg-info text-white border-info"
+            >
+              <i class="mdi mdi-twitter" />
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a
+              href={"#"}
+              class="social-list-item bg-danger text-white border-danger"
+            >
+              <i class="mdi mdi-google" />
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </form>
 
   <div class="mt-5 text-center">
     <p>
       Already have an account ?{" "}
-      <a href="auth-login-2" class="fw-medium text-primary">
+      <a href="/login" class="fw-medium text-primary">
         {" "}
         Login
       </a>{" "}

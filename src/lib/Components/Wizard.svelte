@@ -12,8 +12,8 @@
     Button,
     Input,
   } from "sveltestrap";
-  export let complete: boolean = false;
-  export let nextTab: number;
+  export let nextTab: boolean;
+  export let complete: boolean;
   export let titles: string[];
   export let subscribemodal: boolean;
 
@@ -23,10 +23,12 @@
   let next: boolean = false;
 
   $: previous = active == 0 ? true : false;
-  $: next = active >= end ? !complete : false;
-  $: nextTab = active;
+  $: next = active >= end ? complete : true;
 
-  const toggleTab = (tab: any) => (active = tab);
+  const toggleTab = (tab: any, t: boolean = false) => {
+    active = tab;
+    nextTab = t;
+  };
 </script>
 
 <div>
@@ -66,15 +68,17 @@
                       </NavLink>
                     </NavItem>
                   {/each}
-                  <NavItem class={active == titles.length ? "current" : ""}>
-                    <NavLink
-                      on:click={() => (active = titles.length)}
-                      active={active == titles.length}
-                    >
-                      <span class="number">{titles.length + 1}</span>{" "}
-                      Complete
-                    </NavLink>
-                  </NavItem>
+                  {#if complete}
+                    <NavItem class={active == titles.length ? "current" : ""}>
+                      <NavLink
+                        on:click={() => (active = titles.length)}
+                        active={active == titles.length}
+                      >
+                        <span class="number">{titles.length + 1}</span>{" "}
+                        Complete
+                      </NavLink>
+                    </NavItem>
+                  {/if}
                 </ul>
               </div>
 
@@ -142,11 +146,15 @@
                   </li>
                   <li class="next">
                     <Button
-                      disabled={next}
                       color="primary"
-                      on:click={() => toggleTab(active + 1)}
+                      on:click={() =>
+                        toggleTab(next ? active + 1 : active, (nextTab = true))}
                     >
-                      Next
+                      {#if next}
+                        Next
+                      {:else}
+                        Submit
+                      {/if}
                     </Button>
                   </li>
                 </ul>

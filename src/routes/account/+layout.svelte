@@ -11,7 +11,9 @@
   import { auth, userData } from "$lib/helpers/store";
   import type { Profile } from "$lib/interface/user_interface";
   import { onMount } from "svelte";
+  import { fade, fly, scale, slide } from "svelte/transition";
   import {
+    Alert,
     Card,
     CardBody,
     CardTitle,
@@ -54,28 +56,39 @@
     healthConditions: [],
     healthIssueDescription: "",
   };
-  let titles: string[] = ["Bio Data", "Spirituality", "Health"];
-  let menus: string[] = [
-    "Overview",
-    "Profile",
-    "Documents",
-    "Activity",
-    "Practicums",
-    "Settings",
-  ];
-
+  let alert: false;
   let subscribemodal = false;
-  let nextTab: number;
+  let nextTab = false;
   let complete: boolean;
   let userdata: any;
   let active = 1;
+  let ready = false;
+  let isRef: boolean;
+  let platform = "On-Campos";
+  $: platform = userdata?.platform;
+
+  let titles: string[] = ["Bio Data", "Spirituality", "Health"];
+  $: if (userdata?.platform == "Online")
+    titles = titles.filter((item) => item !== "Health");
+
+  let menus: string[] = [
+    // "Overview",
+    "Profile",
+    "Documents",
+    // "Activity",
+    // "Practicums",
+    // "Settings",
+  ];
 
   $: if (nextTab) {
+    const middleName = profile.middleName;
+    delete profile.middleName;
     const data = Object.entries(profile);
     let total = data.filter(([key]) => key != "progress");
     let val = total.filter(([key, val]) => !!val?.length);
     profile.progress = Math.round((val.length / total.length) * 100);
     profile.id = $auth.cred?.id;
+    profile.middleName = middleName;
     user.query("update", { data: profile });
 
     data.forEach(([key, value]) => {
@@ -88,23 +101,29 @@
     });
 
     complete = profile.progress >= 100 ? true : false;
+    // console.log(profile.progress);
+    nextTab = false;
   }
 
   $: if (browser && $auth.loggedIn) {
     localStorage.auth = JSON.stringify($auth);
   }
 
-  $: if ($userData.user.id) {
+  $: if ($userData.user.id && !ready) {
     userdata = $userData.user;
     Object.keys(profile).forEach((key) => (profile[key] = userdata[key]));
+    complete = profile.progress >= 100 ? true : false;
+    subscribemodal = !complete;
+    ready = true;
+    // console.log(profile);
   }
 
   const togglesubscribemodal = () => (subscribemodal = !subscribemodal);
-  const onModalOpen = () => {
-    // if (browser)
-    //   Object.keys(profile).forEach((key) => (profile[key] = userdata[key]));
+  const onModalClosed = () => {
+    nextTab = true;
+    isRef = complete ? true : false;
   };
-  
+
   $: if (browser && !$userData.user?.id) getUserData($auth.cred?.id);
 
   const getUserData = async (id: string) => {
@@ -113,13 +132,30 @@
       subscribemodal = true;
     }
   };
-
 </script>
 
 {#if $userData.user?.id}
   <div class="page-content">
     <Container fluid>
       <Breadcrumb title="Contacts" breadcrumbItem="Profile" />
+      {#if alert}
+        <div transition:slide={{ duration: 500 }}>
+          <Alert
+            color="info"
+            class="alert-dismissible fade show mb-4"
+            role="alert"
+          >
+            <div class="d-flex">
+              <i class="mdi mdi-alert-circle-outline me-2 fs-1" />
+              <p class="my-auto">
+                A maximum of two referees are reqiured, please click on
+                <a href={""} class="alert-link">Add Referee</a>
+                to add another referee in order to complete your Adullam Application
+              </p>
+            </div>
+          </Alert>
+        </div>
+      {/if}
 
       <Row>
         <Col xl="4">
@@ -191,25 +227,13 @@
           <Card>
             <CardBody>
               <CardTitle class="mb-4 h4">Referees</CardTitle>
-              <p class="text-muted mb-4">
-                <!-- Hi I'm Cynthia Price, has been the industry's standard dummy
-                text href an English person, it will seem like simplified
-                English, as a skeptical Cambridge. -->
-              </p>
-              <Referee />
-            </CardBody>
-          </Card>
-
-          <Card>
-            <CardBody>
-              <CardTitle class="mb-5">Qualifications</CardTitle>
-              <Education />
+              <Referee bind:complete bind:alert bind:isRef />
             </CardBody>
           </Card>
         </Col>
 
         <Col xl="8">
-          <Row>
+          <!-- <Row>
             <Col md={4}>
               <Card class="mini-stats-wid">
                 <CardBody>
@@ -237,16 +261,16 @@
                 </CardBody>
               </Card>
             </Col>
-          </Row>
+          </Row> -->
           <div class="mt-4">
             <Tabs {menus} {active}>
-              <div slot="id-1">
+              <!-- <div slot="id-1">
                 <Overview />
-              </div>
-              <div slot="id-2">
+              </div> -->
+              <div slot="id-1">
                 <ProfileInfo />
               </div>
-              <div slot="id-3">
+              <div slot="id-2">
                 <Document />
               </div>
             </Tabs>
@@ -264,7 +288,7 @@
     toggle={togglesubscribemodal}
     backdrop="static"
     centered
-    on:open={onModalOpen}
+    on:close={onModalClosed}
   >
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -278,10 +302,11 @@
         />
       </div>
       <div class="modal-body">
-        <Wizard bind:complete bind:nextTab bind:subscribemodal {titles}>
+        <Wizard bind:nextTab bind:subscribemodal {complete} {titles}>
           <PersonalInfo bind:profile slot="slot1" />
           <SpiritBackground bind:profile slot="slot2" />
-          <HealthInfo bind:profile slot="slot3" />
+
+          <HealthInfo bind:platform bind:profile slot="slot3" />
         </Wizard>
       </div>
     </div>

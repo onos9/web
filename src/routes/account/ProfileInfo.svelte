@@ -92,11 +92,11 @@
                 <tbody>
                   <tr>
                     <th scope="row">Full Name :</th>
-                    <td>Cynthia Price</td>
+                    <td>{userdata?.fullName}</td>
                   </tr>
                   <tr>
                     <th scope="row">Mobile :</th>
-                    <td>(123) 123 1234</td>
+                    <td>{userdata?.phone}</td>
                   </tr>
                   <tr>
                     <th scope="row">E-mail :</th>

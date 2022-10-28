@@ -96,10 +96,14 @@
                   </DropdownToggle>
 
                   <DropdownMenu direction="right" class="dropdown-menu-end">
-                    <a class="dropdown-item" href={"#"}>Payments</a>
-                    <a class="dropdown-item" href={"#"}>Identity</a>
-                    <a class="dropdown-item" href={"#"}>Certificate</a>
+                    <a class="dropdown-item" href={"#"}>Application</a>
+                    <a class="dropdown-item" href={"#"}>School</a>
+                    <a class="dropdown-item" href={"#"}>Accommodation</a>
+                    <a class="dropdown-item" href={"#"}>ID</a>
+                    <a class="dropdown-item" href={"#"}>SSCE</a>
+                    <a class="dropdown-item" href={"#"}>Degree</a>
                     <a class="dropdown-item" href={"#"}>Transcript</a>
+                    <!-- <a class="dropdown-item" href={"#"}>Others</a> -->
                     <div class="dropdown-divider" />
                     <a class="dropdown-item" href={"#"}>All</a>
                   </DropdownMenu>
@@ -113,7 +117,6 @@
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Title</th>
                     <th scope="col">Category</th>
                     <th scope="col">Date Uploaded</th>
                     <th scope="col" colSpan="2"> Size </th>
@@ -130,7 +133,6 @@
                           {recentfile.filename}
                         </a>
                       </td>
-                      <td>{recentfile.title}</td>
                       <td>{recentfile.category}</td>
                       <td>{formatDate(recentfile.updatedAt)}</td>
                       <td>{recentfile.size / 1000} KB</td>
@@ -187,24 +189,15 @@
             class="form-select"
           >
             <option>Select Category</option>
-            <option value="Payment">Proof of Payment</option>
-            <option value="Identity">Proof of ID</option>
-            <option>Certificate</option>
+            <option value="Application">Proof of Application Fee</option>
+            <option value="School">Proof of School Fee</option>
+            <option value="Accommodation">Proof of Accommodation Fee</option>
+            <option>Official ID</option>
+            <option value="SSCE">Secondary School Certificate</option>
+            <option value="Degree">Barchelor’s Degree</option>
             <option>Transcript</option>
+            <option>Others</option>
           </select>
-        </div>
-        <div class="form-group form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="basicpill-namecard-input112"
-            placeholder="Enter Your Name on Card"
-            bind:value={title}
-          />
-          <label for="basicpill-namecard-input112">Title of Document</label>
-          <div class="form-text text-primary">
-            {`Example: MSc Certificate, OND Certificate etc.`}
-          </div>
         </div>
         <div class="form-group mb-3">
           <input

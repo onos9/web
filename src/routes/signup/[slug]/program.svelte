@@ -8,14 +8,13 @@
 
   let student: Student = {
     id: "",
-    program: "diploma",
+    program: "Select Program Option",
     schorlarshipReason: "",
-    platform: "On-Compos",
+    platform: "Select Platform",
   };
   $: student.id = $auth.cred?.id;
 
   const handleSubmit = async () => {
-    console.log(student);
     const resp = await user.query("update", { data: student });
     if (!!resp?.errors) {
       return;
@@ -27,6 +26,14 @@
 
 <div>
   <h5 class="text-primary text-center">Accademic Options</h5>
+  <p class="text-muted text-center">
+    <span class="text-primary">PGDT</span>
+    applicants must have a minimum of bachelor’s degree or its equivalent
+  </p>
+  <p class="text-muted text-center">
+    <span class="text-primary">DIPLOMA</span>
+    applicants must have a minimum of Secondary School Certificate or its equivalent
+  </p>
 </div>
 
 <div class="mt-4">
@@ -39,6 +46,7 @@
     <div class="mb-3">
       <label for="">Program Option</label>
       <select bind:value={student.program} class="form-select">
+        <option hidden >Select Program Option</option>
         <option value="diploma">Diploma in Theology</option>
         <option value="pgdt">Post Graduate Diploma in Theology</option>
       </select>
@@ -47,7 +55,8 @@
     <div class="mb-3">
       <label for="">Platform</label>
       <select bind:value={student.platform} class="form-select">
-        <option>On-Compos</option>
+        <option hidden >Select Platform</option>
+        <option>On-Campos</option>
         <option>Online</option>
       </select>
     </div>

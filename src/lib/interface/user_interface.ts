@@ -2,7 +2,7 @@ export interface Profile {
     id: string
     firstName: string
     lastName: string
-    middleName: string
+    middleName?: string
     fullName: string
     email: string
     phone: string

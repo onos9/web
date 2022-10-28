@@ -4,7 +4,7 @@
   import { Breadcrumb, Card, CardBody, Col, Container, Row, Table } from "sveltestrap";
 
   let data = getContext("users") as any[];
-  console.log(data);
+  // console.log(data);
   let tags = ["penticostal", "catholic", "methodist"];
 </script>
 

@@ -11,20 +11,13 @@ interface UserStore {
 }
 
 export const axiosPublic = axios.create({
-  baseURL: 'https://api.adullam.ng/query',
+  baseURL: 'http://localhost:8000/query',
   timeout: 15000,
   withCredentials: true,
 });
 
-const refresh = gql`query{
-            refresh{
-                token
-                expiredAt
-            }
-        }`
-
 const instance = axios.create({
-  baseURL: 'https://api.adullam.ng/query',
+  baseURL: 'http://localhost:8000/query',
   timeout: 15000,
   withCredentials: true,
 });
@@ -35,9 +28,8 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 
   if (!cred.token) throw new Error('No Authorization token')
 
-  if (!config.headers["Authorization"]) {
-    config.headers["Authorization"] = `Bearer ${cred.token}`;
-  }
+  config.headers = config.headers ?? {};
+  config.headers.Authorization = config.headers.Authorization ?? `Bearer ${cred.token}`;
 
   return config;
 }, (error: any) => {
@@ -84,10 +76,10 @@ export const request = async (path: string, query: string, variables: object) =>
       variables: variables
     })
     if (!resp) return
-    
+
     const data = resp?.data?.data
     const err = resp?.data?.errors
-    
+
     if (!!err) {
       console.error(err)
       return
@@ -127,7 +119,7 @@ export const publicRequest = async (query: string, variables: object) => {
     if (!!data?.signIn) {
       auth.set({ loggedIn: true, cred: data?.signIn })
     }
-    
+
     if (!!data?.logOut) {
       auth.set({ loggedIn: data?.logOut?.loggedIn, cred: {} })
       goto("/login", { replaceState: true })
