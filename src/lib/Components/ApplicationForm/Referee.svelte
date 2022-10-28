@@ -32,7 +32,8 @@
     });
 
     if (data.referees.length >= 2) {
-      console.log(data);
+      refs = data.referees
+      alert = false
     }
     isOpen = !isOpen;
   };
