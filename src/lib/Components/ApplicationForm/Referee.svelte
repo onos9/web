@@ -29,11 +29,17 @@
 
     mail.query("send", {
       tpl: "reference",
-      to: [email],
-      body: {},
+      to: [$auth.cred?.email],
+      subject: "Reference Questionaire",
+      attach: true,
+      body: {
+        fullName: $auth.cred?.fullName,
+        refereeName: fullName,
+        upload_link: "https://dev.beznet.org/signup/referee",
+      },
     });
-
     fullName = phone = email = "";
+
     const { data } = await referee.query("referees", {
       userId: $auth.cred?.id,
     });
@@ -44,11 +50,11 @@
       alert = false;
       mail.query("send", {
         tpl: "enroll",
-        to: $auth.cred?.email,
-        body: {},
+        to: [$auth.cred?.email],
+        subject: "Adullam Application",
+        body: { fullName: $auth.cred?.fullName },
       });
     }
-    
   };
 
   const getReferees = async () => {

@@ -23,12 +23,12 @@ export const query = {
         }`,
 
     send: gql`
-        mutation($tpl: String!, $to: String!, $subject: String!, $body: Any!){
+        mutation($tpl: String!, $to: [String!], $subject: String!, $attach: Boolean! $body: Any!){
             send(tpl:$tpl, input: {
                 to:$to,
                 subject:$subject,
+                attach:$attach
                 body:$body, 
-                phone:$phone
             })
         }`,
 }

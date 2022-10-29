@@ -6,6 +6,8 @@
   export let profile: Profile;
   export let platform;
   let disabled: boolean;
+
+  $: if (profile.id) profile.healthConditions = profile.healthConditions ?? []
 </script>
 
 {#if platform === "On-Campos"}
@@ -19,6 +21,7 @@
         <FormGroup>
           <Input
             id="r1"
+            name="health"
             type="radio"
             bind:group={disabled}
             value={true}
@@ -26,6 +29,7 @@
           />
           <Input
             id="r2"
+            name="health"
             type="radio"
             bind:group={disabled}
             value={false}

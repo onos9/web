@@ -4,6 +4,8 @@
   import { slide } from "svelte/transition";
   export let profile: Profile;
   let disabled: boolean;
+
+  $: if (profile.id) profile.godsWorkings = profile.godsWorkings ?? []
 </script>
 
 {#if profile.id}
@@ -16,14 +18,14 @@
         >
         <FormGroup>
           <Input
-            id="r1"
+            name="sb"
             type="radio"
             bind:group={disabled}
             value={true}
             label="Yes"
           />
           <Input
-            id="r2"
+            name="sb"
             type="radio"
             bind:group={disabled}
             value={false}
