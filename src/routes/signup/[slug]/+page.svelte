@@ -5,6 +5,7 @@
   import { fade, fly } from "svelte/transition";
   import Program from "./program.svelte";
   import Register from "./register.svelte";
+  import Upload from "./upload.svelte";
   import Verify from "./verify.svelte";
 
   let signup: string;
@@ -25,9 +26,14 @@
       <div in:fly={{ x: -200, duration: 1000 }}>
         <Program bind:response />
       </div>
+    {:else if signup == "upload"}
+      <div in:fly={{ x: -200, duration: 1000 }}>
+        <Upload bind:response />
+      </div>
     {:else}
       <div in:fly={{ x: -200, duration: 1000 }}>
         <Register bind:response />
+        
       </div>
     {/if}
   </div>

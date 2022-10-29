@@ -22,6 +22,7 @@
     "/signup/register",
     "/signup/verify",
     "/signup/program",
+    "/signup/upload",
   ];
   let slug: string;
   $: slug = $page.params.slug;
