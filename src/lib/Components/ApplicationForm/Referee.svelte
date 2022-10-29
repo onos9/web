@@ -2,6 +2,7 @@
   import mail from "$lib/graphql/mail";
   import referee from "$lib/graphql/referee";
   import { auth } from "$lib/helpers/store";
+  import { time } from "svelte-i18n";
   import { Col, Modal, Row, Table } from "sveltestrap";
   export let complete: boolean;
   export let alert: boolean;
@@ -12,6 +13,10 @@
   let email: string;
   let refs: any;
   let refId: any;
+  let loading: boolean;
+
+  let isFinished: boolean;
+  const toggleFinishedModal = () => (isFinished = !isFinished);
 
   let isOpen = false;
   const toggle = () => (isOpen = !isOpen);
@@ -20,15 +25,13 @@
   $: isOpen = isRef;
 
   const handleSubmit = async () => {
-   let resp = await referee.query("create", {
+    let resp = await referee.query("create", {
       userId: $auth.cred?.id,
       fullName,
       phone,
       email,
     });
-
-    isOpen = !isOpen;
-
+    loading = true;
     resp = await mail.query("send", {
       tpl: "reference",
       to: [$auth.cred?.email],
@@ -37,7 +40,7 @@
       body: {
         fullName: $auth.cred?.fullName,
         refereeName: fullName,
-        upload_link: "https://dev.beznet.org/signup/referee",
+        upload_link: `https://dev.beznet.org/signup/${$auth.cred?.id}`,
       },
     });
     fullName = phone = email = "";
@@ -49,13 +52,18 @@
 
     if (refs.length >= 2) {
       alert = false;
-      mail.query("send", {
+      resp = await mail.query("send", {
         tpl: "enroll",
         to: [$auth.cred?.email],
         attach: false,
         subject: "Adullam Application",
         body: { fullName: $auth.cred?.fullName },
       });
+      loading = false;
+      isOpen = false;
+      setTimeout(() => {
+        isFinished = true;
+      }, 1000);
     }
   };
 
@@ -96,8 +104,13 @@
   <Col lg={12}>
     <div class="mb-4 text-center">
       <button type="button" class="btn btn-primary btn-sm" on:click={toggle}>
-        <i class="bx bx-plus ms-1" />
-        Add Referee
+        {#if loading}
+          <i class="bx bx-loader bx-spin font-size-16 align-middle me-2" />
+          Loading
+        {:else}
+          <i class="bx bx-plus ms-1" />
+          Add Referee
+        {/if}
       </button>
     </div>
   </Col>
@@ -157,4 +170,38 @@
       </button>
     </div>
   </form>
+</Modal>
+
+<Modal
+  backdrop="static"
+  header="Add Referee"
+  size="md"
+  isOpen={isFinished}
+  toggle={toggleFinishedModal}
+  body
+  centered
+>
+  <div class="row justify-content-center">
+    <Col lg="6">
+      <div class="text-center mb-5">
+        <div class="mb-4">
+          <i class="mdi mdi-check-circle-outline text-success display-4" />
+        </div>
+        <div>
+          <h5>Congratulations!</h5>
+          <p class="text-muted">
+            You have completed the application. Check your email for more
+            details
+          </p>
+        </div>
+        <button
+          type="button"
+          class="btn btn-success btn-md"
+          on:click={() => (isFinished = false)}
+        >
+          Ok, Got it
+        </button>
+      </div>
+    </Col>
+  </div>
 </Modal>
