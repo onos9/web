@@ -131,7 +131,7 @@ export const publicRequest = async (query: string, variables: object) => {
       return
     }
 
-    if (err?.length > 0 && err[0].message === "http: named cookie not present") {
+    if (!!err && err[0].message === "http: named cookie not present") {
       goto("/login", { replaceState: true })
     }
 
