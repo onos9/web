@@ -11,13 +11,13 @@ interface UserStore {
 }
 
 export const axiosPublic = axios.create({
-  baseURL: 'https://api.adullam.ng/query',
+  baseURL: 'http://localhost:8000/query',
   timeout: 60000,
   withCredentials: true,
 });
 
 const instance = axios.create({
-  baseURL: 'https://api.adullam.ng/query',
+  baseURL: 'http://localhost:8000/query',
   timeout: 60000,
   withCredentials: true,
 });
@@ -131,7 +131,7 @@ export const publicRequest = async (query: string, variables: object) => {
       return
     }
 
-    if (err?.length > 0) {
+    if (err[0] && err[0].message === "http: named cookie not present") {
       goto("/login", { replaceState: true })
     }
 
