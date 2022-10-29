@@ -2,7 +2,6 @@
   import mail from "$lib/graphql/mail";
   import referee from "$lib/graphql/referee";
   import { auth } from "$lib/helpers/store";
-  import { time } from "svelte-i18n";
   import { Col, Modal, Row, Table } from "sveltestrap";
   export let complete: boolean;
   export let alert: boolean;
@@ -24,47 +23,37 @@
   $: alert = refs?.length < 2 && complete;
   $: isOpen = isRef;
 
+  const refModalClosed = async () => {
+    if (refs.length >= 2 && !loading && !isOpen) {
+      alert = false;
+      // const resp = await mail.query("send", {
+      //   tpl: "enroll",
+      //   to: [$auth.cred?.email],
+      //   attach: false,
+      //   subject: "Adullam Application",
+      //   body: { fullName: $auth.cred?.fullName },
+      // });
+      isFinished = true;
+    }
+  };
+
   const handleSubmit = async () => {
+    loading = true;
     let resp = await referee.query("create", {
       userId: $auth.cred?.id,
       fullName,
       phone,
       email,
     });
-    loading = true;
-    resp = await mail.query("send", {
-      tpl: "reference",
-      to: [$auth.cred?.email],
-      subject: "Reference Questionaire",
-      attach: true,
-      body: {
-        fullName: $auth.cred?.fullName,
-        refereeName: fullName,
-        upload_link: `https://dev.beznet.org/signup/${$auth.cred?.id}`,
-      },
-    });
-    fullName = phone = email = "";
 
     const { data } = await referee.query("referees", {
       userId: $auth.cred?.id,
     });
-    refs = data.referees;
+    loading = false;
+    isOpen = false;
+    fullName = phone = email = "";
 
-    if (refs.length >= 2) {
-      alert = false;
-      resp = await mail.query("send", {
-        tpl: "enroll",
-        to: [$auth.cred?.email],
-        attach: false,
-        subject: "Adullam Application",
-        body: { fullName: $auth.cred?.fullName },
-      });
-      loading = false;
-      isOpen = false;
-      setTimeout(() => {
-        isFinished = true;
-      }, 1000);
-    }
+    refs = data.referees;
   };
 
   const getReferees = async () => {
@@ -74,10 +63,10 @@
     refs = data.referees;
   };
 
-  $: if (!refs || refId) getReferees();
+  $: if (!refs) getReferees();
 </script>
 
-{#if refs}
+{#if refs?.length > 0}
   <div class="table-responsive">
     {#each refs as ref}
       <Table class="table-nowrap mb-4">
@@ -124,6 +113,7 @@
   {toggle}
   body
   centered
+  on:close={refModalClosed}
 >
   <form>
     <div class="row ps-5 pe-5">
@@ -174,7 +164,6 @@
 
 <Modal
   backdrop="static"
-  header="Add Referee"
   size="md"
   isOpen={isFinished}
   toggle={toggleFinishedModal}
