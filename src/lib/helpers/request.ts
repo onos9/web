@@ -11,13 +11,13 @@ interface UserStore {
 }
 
 export const axiosPublic = axios.create({
-  baseURL: 'http://localhost:8000/query',
+  baseURL: 'https://api.adullam.ng/query',
   timeout: 60000,
   withCredentials: true,
 });
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000/query',
+  baseURL: 'https://api.adullam.ng/query',
   timeout: 60000,
   withCredentials: true,
 });
