@@ -18,7 +18,7 @@ export const axiosPublic = axios.create({
 
 const instance = axios.create({
   baseURL: 'http://localhost:8000/query',
-  timeout: 15000,
+  timeout: 60000,
   withCredentials: true,
 });
 

@@ -20,14 +20,16 @@
   $: isOpen = isRef;
 
   const handleSubmit = async () => {
-    referee.query("create", {
+   let resp = await referee.query("create", {
       userId: $auth.cred?.id,
       fullName,
       phone,
       email,
     });
 
-    mail.query("send", {
+    isOpen = !isOpen;
+
+    resp = await mail.query("send", {
       tpl: "reference",
       to: [$auth.cred?.email],
       subject: "Reference Questionaire",
@@ -44,13 +46,13 @@
       userId: $auth.cred?.id,
     });
     refs = data.referees;
-    isOpen = !isOpen;
 
     if (refs.length >= 2) {
       alert = false;
       mail.query("send", {
         tpl: "enroll",
         to: [$auth.cred?.email],
+        attach: false,
         subject: "Adullam Application",
         body: { fullName: $auth.cred?.fullName },
       });
