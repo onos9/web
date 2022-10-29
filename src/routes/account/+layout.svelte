@@ -149,7 +149,10 @@
               <i class="mdi mdi-alert-circle-outline me-2 fs-1" />
               <p class="my-auto">
                 A maximum of two referees are reqiured, please click on
-                <a href={""} class="alert-link">Add Referee</a>
+                <button
+                  on:click={() => (isRef = true)}
+                  class="btn btn-link alert-link p-0">Add Referee</button
+                >
                 to add another referee in order to complete your Adullam Application
               </p>
             </div>

@@ -26,13 +26,13 @@
   const refModalClosed = async () => {
     if (refs.length >= 2 && !loading && !isOpen) {
       alert = false;
-      // const resp = await mail.query("send", {
-      //   tpl: "enroll",
-      //   to: [$auth.cred?.email],
-      //   attach: false,
-      //   subject: "Adullam Application",
-      //   body: { fullName: $auth.cred?.fullName },
-      // });
+      const resp = await mail.query("send", {
+        tpl: "enroll",
+        to: [$auth.cred?.email],
+        attach: false,
+        subject: "Adullam Application",
+        body: { fullName: $auth.cred?.fullName },
+      });
       isFinished = true;
     }
   };
