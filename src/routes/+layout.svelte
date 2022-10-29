@@ -33,7 +33,7 @@
   });
 </script>
 
-{#if $auth.loggedIn}
+{#if $auth.loggedIn && slug != "program"}
   <svelte:component this={VerticalLayout}>
     <slot />
   </svelte:component>

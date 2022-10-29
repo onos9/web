@@ -5,8 +5,7 @@
   export let response: any;
   let loading = false;
   let isValid = true;
-  let regx =
-    '/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/';
+  let regx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   let user: User = {
     fullName: "",
@@ -16,12 +15,15 @@
   };
 
   const handleSubmit = async (e: any) => {
-    // isValid = !!user.email.toLowerCase().match(regx);
+    isValid = !!user.email.toLowerCase().match(regx);
+    console.log(isValid);
     if (isValid) {
+      loading = true;
       response = await Auth.queryPublic("signUp", user);
+      loading = false;
       response = response.data?.signUp;
     }
-    if (!!response.errors && response.errors[0]?.message.includes("E11000")) {
+    if (!!response?.errors && response?.errors[0]?.message.includes("E11000")) {
       return;
     }
 

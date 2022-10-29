@@ -11,13 +11,13 @@ interface UserStore {
 }
 
 export const axiosPublic = axios.create({
-  baseURL: 'https://api.adullam.ng/query',
+  baseURL: 'http://localhost:8000/query',
   timeout: 15000,
   withCredentials: true,
 });
 
 const instance = axios.create({
-  baseURL: 'https://api.adullam.ng/query',
+  baseURL: 'http://localhost:8000/query',
   timeout: 15000,
   withCredentials: true,
 });
@@ -118,6 +118,7 @@ export const publicRequest = async (query: string, variables: object) => {
 
     if (!!data?.signIn) {
       auth.set({ loggedIn: true, cred: data?.signIn })
+      return resp.data
     }
 
     if (!!data?.logOut) {
@@ -127,10 +128,11 @@ export const publicRequest = async (query: string, variables: object) => {
 
     if (!!data?.verifyEmail) {
       auth.set({ loggedIn: true, cred: data?.verifyEmail })
+      return resp.data
     }
 
-    if (!!err.length > 0) {
-      goto("/login", { replaceState: true })
+    if (err?.length > 0) {
+      // goto("/login", { replaceState: true })
     }
 
     return resp.data

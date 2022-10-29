@@ -1,4 +1,5 @@
 <script lang="ts">
+  import mail from "$lib/graphql/mail";
   import referee from "$lib/graphql/referee";
   import { auth } from "$lib/helpers/store";
   import { Col, Modal, Row, Table } from "sveltestrap";
@@ -19,23 +20,35 @@
   $: isOpen = isRef;
 
   const handleSubmit = async () => {
-    const resp = await referee.query("create", {
+    referee.query("create", {
       userId: $auth.cred?.id,
       fullName,
       phone,
       email,
     });
 
+    mail.query("send", {
+      tpl: "reference",
+      to: [email],
+      body: {},
+    });
+
     fullName = phone = email = "";
     const { data } = await referee.query("referees", {
       userId: $auth.cred?.id,
     });
-
-    if (data.referees.length >= 2) {
-      refs = data.referees
-      alert = false
-    }
+    refs = data.referees;
     isOpen = !isOpen;
+
+    if (refs.length >= 2) {
+      alert = false;
+      mail.query("send", {
+        tpl: "enroll",
+        to: $auth.cred?.email,
+        body: {},
+      });
+    }
+    
   };
 
   const getReferees = async () => {

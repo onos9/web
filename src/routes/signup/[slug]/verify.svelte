@@ -37,7 +37,7 @@
     <h4>Verify your email</h4>
     <p>
       Please enter the 4 digit code sent to{" "}
-      <span class="fw-semibold">{response.email}</span>
+      <span class="fw-semibold">{response?.email}</span>
     </p>
 
     <form>
