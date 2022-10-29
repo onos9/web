@@ -13,8 +13,8 @@
   import Auth from "$lib/graphql/auth";
   import { goto } from "$app/navigation";
 
-  let email = "onosbrown.saved@gmail.com";
-  let password = "1234";
+  let email: string;
+  let password: string;
 
   $: if ($auth.loggedIn) goto("/", { replaceState: true });
 

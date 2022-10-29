@@ -14,6 +14,7 @@
   import { auth } from "$lib/helpers/store";
   import VerticalLayout from "../routes/VerticalLayout/Index.svelte";
   import { onMount } from "svelte";
+  import { setLocale } from "$lib/helpers/i18n";
 
   const publicRoutes = [
     "/login",
@@ -25,9 +26,9 @@
   let slug: string;
   $: slug = $page.params.slug;
 
-  $: console.log(!publicRoutes.includes($page.url.pathname));
-
+  $: {} 
   onMount(() => {
+    setLocale();
     if (browser && !publicRoutes.includes($page.url.pathname))
       Auth.queryPublic("refresh", {});
   });
