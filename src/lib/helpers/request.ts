@@ -129,7 +129,7 @@ export const publicRequest = async (query: string, variables: object) => {
       auth.set({ loggedIn: true, cred: data?.verifyEmail })
     }
 
-    if (!!err && err[0]?.message === "http: named cookie not present") {
+    if (!!err.length > 0) {
       goto("/login", { replaceState: true })
     }
 

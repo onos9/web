@@ -25,11 +25,10 @@
   let slug: string;
   $: slug = $page.params.slug;
 
+  $: console.log(!publicRoutes.includes($page.url.pathname));
+
   onMount(() => {
-    if (
-      (browser && !publicRoutes.includes($page.url.pathname)) ||
-      slug == "program"
-    )
+    if (browser && !publicRoutes.includes($page.url.pathname))
       Auth.queryPublic("refresh", {});
   });
 </script>
@@ -39,6 +38,8 @@
     <slot />
   </svelte:component>
 {:else if publicRoutes.includes($page.url.pathname)}
+  <slot />
+{:else}
   <slot />
 {/if}
 
