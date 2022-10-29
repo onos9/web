@@ -93,13 +93,8 @@
   <Col lg={12}>
     <div class="mb-4 text-center">
       <button type="button" class="btn btn-primary btn-sm" on:click={toggle}>
-        {#if loading}
-          <i class="bx bx-loader bx-spin font-size-16 align-middle me-2" />
-          Loading
-        {:else}
-          <i class="bx bx-plus ms-1" />
-          Add Referee
-        {/if}
+        <i class="bx bx-plus ms-1" />
+        Add Referee
       </button>
     </div>
   </Col>
@@ -156,7 +151,12 @@
         type="button"
         class="btn btn-primary"
       >
-        Submit
+        {#if loading}
+          <i class="bx bx-loader bx-spin font-size-16 align-middle me-2" />
+          Loading
+        {:else}
+          Submit
+        {/if}
       </button>
     </div>
   </form>

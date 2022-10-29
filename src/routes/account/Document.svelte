@@ -25,6 +25,7 @@
   let uploaded: any;
   let title: string;
   let category: string;
+  let loading: boolean;
 
   $: if (browser && $auth.loggedIn) {
     localStorage.auth = JSON.stringify($auth);
@@ -43,8 +44,10 @@
   };
 
   const handleSubmit = () => {
+    loading = true;
     let payload = { userId: $auth.cred?.id, title, category, file: null };
     file.query("create", payload, uploaded);
+    loading = false;
     isOpen = !isOpen;
   };
 
@@ -215,7 +218,12 @@
         type="button"
         class="btn btn-primary"
       >
-        Submit
+        {#if loading}
+          <i class="bx bx-loader bx-spin font-size-16 align-middle me-2" />
+          Loading
+        {:else}
+          Submit
+        {/if}
       </button>
     </div>
   </form>
