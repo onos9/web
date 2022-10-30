@@ -26,7 +26,7 @@
   $: next = active >= end ? complete : true;
 
   $: if (complete) active = end;
-  
+
   const toggleTab = (tab: any, t: boolean = false) => {
     active = tab;
     nextTab = t;
@@ -148,6 +148,7 @@
                   </li>
                   <li class="next">
                     <Button
+                      disabled={next}
                       color="primary"
                       on:click={() =>
                         toggleTab(next ? active + 1 : active, (nextTab = true))}
