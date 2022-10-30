@@ -52,7 +52,7 @@
       <select bind:value={user.role} class="form-select">
         <option value="prospective">Prospective Student</option>
         <option value="partner">Partner</option>
-        <option value="staff">Staff</option>
+        <!-- <option value="staff">Staff</option> -->
       </select>
     </div>
     <hr />

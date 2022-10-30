@@ -1,11 +1,11 @@
 <script lang="ts">
   import { browser } from "$app/environment";
-  import user from "$lib/graphql/user";
-  import { auth, userData } from "$lib/helpers/store";
+  import file from "$lib/graphql/file";
+  import { auth } from "$lib/helpers/store";
+  import { formatDate } from "$lib/helpers/utils";
   import {
     Card,
     CardBody,
-    CardTitle,
     Col,
     Dropdown,
     DropdownMenu,
@@ -14,10 +14,7 @@
     Row,
     Table,
   } from "sveltestrap";
-  import Dropzone from "svelte-file-dropzone";
-  import file from "$lib/graphql/file";
-  import { onMount } from "svelte";
-  import { formatDate } from "$lib/helpers/utils";
+  export let userId;
 
   let documents: any;
   let isOpen = false;
@@ -44,7 +41,7 @@
 
   const handleSubmit = async () => {
     loading = true;
-    let payload = { userId: $auth.cred?.id, category, file: null };
+    let payload = { userId, category, file: null };
     const resp = await file.query("create", payload, uploaded);
     if (!!resp?.data?.createFile) getDocuments();
     loading = false;
@@ -52,12 +49,12 @@
   };
 
   const getDocuments = async () => {
-    const { data } = await file.query("files", {});
+    const { data } = await file.query("files", { userId });
     documents = data.files;
   };
 
   $: if (!documents) getDocuments();
-  // $: console.log(documents);
+  $: console.log(userId);
 
   const fileIcons = {
     zip: "mdi mdi-folder-zip font-size-16 align-middle text-warning me-2",

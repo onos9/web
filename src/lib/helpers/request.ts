@@ -27,7 +27,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
   const { cred } = get(auth);
   // console.log(cred);
-
+ 
   if (!cred.token) throw new Error('No Authorization token')
 
   config.headers = config.headers ?? {};
@@ -39,7 +39,7 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 
 instance.interceptors.response.use((response: AxiosResponse) => {
   const err = response?.data?.data?.errors
-
+  
   if (err && err?.message == "Token is expired") {
     console.log(err?.message)
   }

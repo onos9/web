@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from "$app/environment";
+  import { page } from "$app/stores";
   import user from "$lib/graphql/user";
   import { auth, userData } from "$lib/helpers/store";
   import { getContext } from "svelte";
@@ -16,11 +17,14 @@
   let data: any[];
   let tags = ["penticostal", "catholic", "methodist"];
 
-  $: if (browser && $auth.loggedIn) user.query("users", {});
+  $: if (browser && $auth.loggedIn) doRefresh($page.url);
   $: if (browser) data = $userData.users;
+  // $: console.log($page.url)
+
+  const doRefresh = (page: any) => user.query("users", {});
 </script>
 
-{#if $userData.users.length > 0}
+{#if $userData.users?.length > 0}
   <div class="page-content">
     <Container fluid>
       <Breadcrumb title="Users" breadcrumbItem={"All Users"} />

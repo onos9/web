@@ -1,66 +1,69 @@
 <script lang="ts">
   import { browser } from "$app/environment";
+  import { page } from "$app/stores";
   import profileImg from "$lib/assets/images/profile-img.png";
-  import avatarImg from "$lib/assets/images/users/avatar-1.jpg";
   import Breadcrumb from "$lib/common/Breadcrumb.svelte";
-  import Info from "$lib/Components/Info.svelte";
-  import MiniStats from "$lib/Components/MiniStats.svelte";
+  import Document from "$lib/Components/Account/Document.svelte";
+  import ProfileInfo from "$lib/Components/Account/ProfileInfo.svelte";
+  import Referee from "$lib/Components/ApplicationForm/Referee.svelte";
   import Tabs from "$lib/Components/Tabs.svelte";
   import user from "$lib/graphql/user";
   import { auth, userData } from "$lib/helpers/store";
-  import { onMount, setContext } from "svelte";
+  import { slide } from "svelte/transition";
   import {
+    Alert,
     Card,
     CardBody,
-    CardImg,
     CardTitle,
     Col,
-    Container,
-    Row,
-    Table,
+    Container, Row
   } from "sveltestrap";
 
-  setContext("breadcrumb", { title: "Users", breadcrumbItem: "Profile" });
-  let container: HTMLElement;
+  let alert: false;
   let subscribemodal = false;
-  let edited: string;
+  let complete: boolean;
+  let active = 0;
+  let isRef: boolean;
 
   let menus: string[] = [
-    "Overview",
+    // "Overview",
     "Profile",
-    "Activity",
-    "Practicums",
-    "Settings",
+    "Documents",
+    // "Activity",
+    // "Practicums",
+    // "Settings",
   ];
 
-  $: if (browser && $auth.loggedIn) {
-    localStorage.auth = JSON.stringify($auth);
-  }
-
   const togglesubscribemodal = () => (subscribemodal = !subscribemodal);
-
-  // $: console.log($userData?.user);
-  $: if (browser && !$userData.user?.id)
-    user.query("user", { id: $auth.cred?.id });
-
-  // onMount(async () => {
-  //   if (browser && $userData.user?.id) {
-  //     const ApexCharts = (await import("apexcharts")).default;
-  //     const chart = new ApexCharts(container, data.options);
-  //     chart.render();
-  //   }
-  // });
-
-  let userdata: any;
-  $: userdata = $userData.user;
-
-  var emailid = "admin@themesbrand.com";
+  $: if (browser) user.query("user", { id: $page.params.id });
 </script>
 
 {#if $userData.user?.id}
   <div class="page-content">
     <Container fluid>
-      <Breadcrumb title="Users" breadcrumbItem="Profile" />
+      <Breadcrumb title="Contacts" breadcrumbItem="Profile" />
+      {#if alert}
+        <div transition:slide={{ duration: 500 }}>
+          <Alert
+            color="info"
+            class="alert-dismissible fade show mb-4"
+            role="alert"
+          >
+            <div class="d-flex">
+              <i class="mdi mdi-alert-circle-outline me-2 fs-1" />
+              <p class="my-auto">
+                A maximum of two referees are reqiured, please click on
+                <button
+                  on:click={() => (isRef = true)}
+                  class="btn btn-link alert-link p-0">Add Referee</button
+                >
+                to add another referee in order to complete your Adullam Application
+              </p>
+            </div>
+          </Alert>
+        </div>
+      {/if}
+
       <Row>
         <Col xl="4">
           <Card class="overflow-hidden">
@@ -81,23 +84,23 @@
               <Row>
                 <Col sm="4">
                   <div class="avatar-md profile-user-wid mb-4">
-                    {#if !userdata?.avatarUrl}
+                    {#if !$userData.user?.avatarUrl}
                       <span class="avatar-title fs-1 rounded-circle">
-                        {userdata?.fullName.charAt(0)}
+                        {$userData.user?.fullName.charAt(0)}
                       </span>
                     {:else}
                       <img
                         class="img-thumbnail rounded-circle"
-                        src={userdata?.avatarUrl}
+                        src={$userData.user?.avatarUrl}
                         alt=""
                       />
                     {/if}
                   </div>
                   <h5 class="font-size-15 text-truncate">
-                    {userdata?.fullName}
+                    {$userData.user?.fullName}
                   </h5>
                   <p class="text-muted mb-0 text-truncate text-capitalize">
-                    {userdata?.role}
+                    {$userData.user?.role}
                   </p>
                 </Col>
 
@@ -113,145 +116,37 @@
                         <p class="text-muted mb-0">Practicums</p>
                       </Col>
                     </Row>
-                    <div class="mt-4">
-                      <button
-                        type="button"
-                        class="btn btn-primary btn-sm"
-                        on:click={togglesubscribemodal}
-                      >
-                        Edit Profile
-                        <i class="mdi mdi-arrow-right ms-1" />
-                      </button>
-                    </div>
+                    {#if $userData.user?.role == "prospective"}
+                      <div class="mt-4">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm"
+                          on:click={togglesubscribemodal}
+                        >
+                          Edit Profile
+                          <i class="mdi mdi-arrow-right ms-1" />
+                        </button>
+                      </div>
+                    {/if}
                   </div>
                 </Col>
               </Row>
             </CardBody>
           </Card>
-
           <Card>
             <CardBody>
               <CardTitle class="mb-4 h4">Referees</CardTitle>
-              <p class="text-muted mb-4">
-                Hi I'm Cynthia Price, has been the industry's standard dummy
-                text href an English person, it will seem like simplified
-                English, as a skeptical Cambridge.
-              </p>
-              <div slot="header">Personal Information</div>
-              <div class="table-responsive">
-                <div class="table-responsive">
-                  <Table class="table-nowrap mb-3 border">
-                    <tbody>
-                      <tr>
-                        <th scope="row">Full Name :</th>
-                        <td>Cynthia Price</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Mobile :</th>
-                        <td>(123) 123 1234</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E-mail :</th>
-                        <td>{emailid}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                  <Table class="table-nowrap mb-3 border">
-                    <tbody>
-                      <tr>
-                        <th scope="row">Full Name :</th>
-                        <td>Cynthia Price</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Mobile :</th>
-                        <td>(123) 123 1234</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E-mail :</th>
-                        <td>{emailid}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </div>
-              </div>
-            </CardBody>
-          </Card>
-
-          <Card>
-            <CardBody>
-              <CardTitle class="mb-5">Qualifications</CardTitle>
-              <div class="">
-                <ul class="verti-timeline list-unstyled">
-                  <li class="event-list active">
-                    <div class="event-timeline-dot">
-                      <i class="bx bx-right-arrow-circle bx-fade-right" />
-                    </div>
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <i class="bx bx-server h4 text-primary" />
-                      </div>
-                      <div class="flex-grow-1">
-                        <div>
-                          <h5 class="font-size-15">
-                            <a href={"/#"} class="text-dark"
-                              >Back end Developer</a
-                            >
-                          </h5>
-                          <span class="text-primary">2016 - 19</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="event-list">
-                    <div class="event-timeline-dot">
-                      <i class="bx bx-right-arrow-circle" />
-                    </div>
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <i class="bx bx-code h4 text-primary" />
-                      </div>
-                      <div class="flex-grow-1">
-                        <div>
-                          <h5 class="font-size-15">
-                            <a href={"/#"} class="text-dark"
-                              >Front end Developer</a
-                            >
-                          </h5>
-                          <span class="text-primary">2013 - 16</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="event-list">
-                    <div class="event-timeline-dot">
-                      <i class="bx bx-right-arrow-circle" />
-                    </div>
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <i class="bx bx-edit h4 text-primary" />
-                      </div>
-                      <div class="flex-grow-1">
-                        <div>
-                          <h5 class="font-size-15">
-                            <a href={"/#"} class="text-dark">UI /UX Designer</a>
-                          </h5>
-                          <span class="text-primary">2011 - 13</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <Referee bind:complete bind:alert bind:isRef />
             </CardBody>
           </Card>
         </Col>
 
         <Col xl="8">
-          <Row>
+          <!-- <Row>
             <Col md={4}>
               <Card class="mini-stats-wid">
                 <CardBody>
-                  <MiniStats name="Completed Courses" stat="12">
+                  <MiniStats name="Completed Courses" stat="0">
                     <i slot="icon" class="bx bx-check-circle font-size-24" />
                   </MiniStats>
                 </CardBody>
@@ -260,7 +155,7 @@
             <Col md={4}>
               <Card class="mini-stats-wid">
                 <CardBody>
-                  <MiniStats name="Pending Courses" stat="12">
+                  <MiniStats name="Pending Courses" stat="0">
                     <i slot="icon" class="bx bx-hourglass font-size-24" />
                   </MiniStats>
                 </CardBody>
@@ -269,169 +164,23 @@
             <Col md={4}>
               <Card class="mini-stats-wid">
                 <CardBody>
-                  <MiniStats name="New Converts" stat="2,345">
+                  <MiniStats name="New Converts" stat="0">
                     <i slot="icon" class="bx bx-package font-size-24" />
                   </MiniStats>
                 </CardBody>
               </Card>
             </Col>
-          </Row>
+          </Row> -->
           <div class="mt-4">
-            <Tabs {menus}>
+            <Tabs {menus} {active}>
+              <!-- <div slot="id-1">
+                <Overview />
+              </div> -->
               <div slot="id-1">
-                <Card>
-                  <CardBody>
-                    <CardTitle class="mb-4 h4">Converts Stats</CardTitle>
-                    <div
-                      bind:this={container}
-                      id="revenue-chart"
-                      class="apex-charts"
-                    />
-                  </CardBody>
-                </Card>
-                <Card>
-                  <CardBody>
-                    <CardTitle class="mb-4 h4">My Courses</CardTitle>
-                    <div class="table-responsive">
-                      <Table class="table-nowrap table-hover mb-0">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Courses</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">Deadline</th>
-                            <th scope="col">Code</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Skote admin UI</td>
-                            <td>2 Sep, 2019</td>
-                            <td>20 Oct, 2019</td>
-                            <td>506</td>
-                          </tr>
-
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Skote admin Logo</td>
-                            <td>1 Sep, 2019</td>
-                            <td>2 Sep, 2019</td>
-                            <td>94</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Redesign - Landing page</td>
-                            <td>21 Sep, 2019</td>
-                            <td>29 Sep, 2019</td>
-                            <td>156</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">4</th>
-                            <td>App Landing UI</td>
-                            <td>29 Sep, 2019</td>
-                            <td>04 Oct, 2019</td>
-                            <td>122</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">5</th>
-                            <td>Blog Template</td>
-                            <td>05 Oct, 2019</td>
-                            <td>16 Oct, 2019</td>
-                            <td>164</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">6</th>
-                            <td>Redesign - Multipurpose Landing</td>
-                            <td>17 Oct, 2019</td>
-                            <td>05 Nov, 2019</td>
-                            <td>192</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">7</th>
-                            <td>Logo Branding</td>
-                            <td>04 Nov, 2019</td>
-                            <td>05 Nov, 2019</td>
-                            <td>94</td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </div>
-                  </CardBody>
-                </Card>
+                <ProfileInfo />
               </div>
               <div slot="id-2">
-                <Card>
-                  <CardBody>
-                    <CardTitle class="mb-4 h4">About Me</CardTitle>
-                    <Row>
-                      <Col lg="2">
-                        <CardImg
-                          src={avatarImg}
-                          alt="Beznet"
-                          class="rounded avatar-md"
-                        />
-                      </Col>
-                      <Col lg="10"
-                        ><p class="text-muted mb-4">
-                          Hi I'm Cynthia Price, has been the industry's standard
-                          dummy text href an English person, it will seem like
-                          simplified English, as a skeptical Cambridge.
-                        </p></Col
-                      ></Row
-                    >
-                  </CardBody>
-                  <Row>
-                    <Col lg="2" />
-                    <Col lg="10" />
-                  </Row>
-                </Card>
-
-                <Row>
-                  <Col xs="12">
-                    <Card>
-                      <CardBody>
-                        <CardTitle class="mb-4 h4"
-                          >Personal Information</CardTitle
-                        >
-                        <Info class="mb-3" name="Full Name" bind:edited />
-                        <Info class="mb-3" name="Email" bind:edited />
-                        <Info class="mb-3" name="Phone" bind:edited />
-                      </CardBody>
-                    </Card>
-                  </Col>
-                  <Col xs="12">
-                    <Card>
-                      <CardBody>
-                        <CardTitle class="mb-4 h4"
-                          >Personal Information</CardTitle
-                        >
-                        <div class="table-responsive">
-                          <Table class="table-nowrap mb-0">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Full Name :</th>
-                                <td>Cynthia Price</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Mobile :</th>
-                                <td>(123) 123 1234</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">E-mail :</th>
-                                <td>{emailid}</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Location :</th>
-                                <td>California, United States</td>
-                              </tr>
-                            </tbody>
-                          </Table>
-                        </div>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
+                <Document userId={$page.params?.id ?? $auth.cred?.id}/>
               </div>
             </Tabs>
           </div>

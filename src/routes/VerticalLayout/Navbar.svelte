@@ -177,32 +177,32 @@
                 >
               </li>
               <li>
-                <a class="side-nav-link-ref" href="/users/prospectives"
+                <a class="side-nav-link-ref" href="/users/prospective"
                   >{$_("menuitems.user.list.prospectives")}</a
                 >
               </li>
               <li>
-                <a class="side-nav-link-ref" href="users/sudents"
+                <a class="side-nav-link-ref" href="/users/student"
                   >{$_("menuitems.user.list.sudents")}</a
                 >
               </li>
               <li>
-                <a class="side-nav-link-ref" href="/users/tutors"
+                <a class="side-nav-link-ref" href="/users/faculty"
                   >{$_("menuitems.user.list.tutors")}</a
                 >
               </li>
               <li>
-                <a class="side-nav-link-ref" href="users/partners"
+                <a class="side-nav-link-ref" href="/users/partner"
                   >{$_("menuitems.user.list.partners")}</a
                 >
               </li>
               <li>
-                <a class="side-nav-link-ref" href="/users/Guests"
+                <a class="side-nav-link-ref" href="/users/guest"
                   >{$_("menuitems.user.list.Guests")}</a
                 >
               </li>
               <li>
-                <a class="side-nav-link-ref" href="/users/administrators"
+                <a class="side-nav-link-ref" href="/users/administrator"
                   >{$_("menuitems.user.list.administrators")}</a
                 >
               </li>

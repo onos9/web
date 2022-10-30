@@ -26,7 +26,7 @@
 
   let userdata: any;
   $: userdata = $userData.user;
-  $: console.log(userdata);
+  // $: console.log(userdata);
 </script>
 
 {#if $userData.user?.id}
@@ -100,7 +100,7 @@
               bind:edited
             />
             <Info
-              icon="bx bx-phone"
+              icon="mdi mdi-gender-male-female"
               class="mb-4"
               name="Gender"
               value={userdata?.gender}
@@ -227,11 +227,11 @@
                   </tr>
                   <tr>
                     <th scope="row">Pastor's Email :</th>
-                    <td>{userdata?.pastorPhone}</td>
+                    <td>{userdata?.pastorEmail}</td>
                   </tr>
                   <tr>
                     <th scope="row">Pastor's Phone Number :</th>
-                    <td>{userdata?.pastorEmail}</td>
+                    <td>{userdata?.pastorPhone}</td>
                   </tr>
                   <tr>
                     <th scope="row">Name of Ministry :</th>

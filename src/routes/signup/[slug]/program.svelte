@@ -90,9 +90,9 @@
     {/if}
 
     <div class="mt-4 d-grid">
-      <button class="btn btn-primary w-md waves-effect waves-light"
-        >Submit</button
-      >
+      <button type="submit" class="btn btn-primary w-md waves-effect waves-light">
+        Submit
+      </button>
     </div>
   </form>
 </div>

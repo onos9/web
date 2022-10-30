@@ -5,8 +5,8 @@ import gql from 'graphql-tag';
 
 export const query = {
     files: gql`
-        query{
-            files{
+        query($userId: ID!){
+            files(userId: $userId){
                 id
                 userId
                 filename

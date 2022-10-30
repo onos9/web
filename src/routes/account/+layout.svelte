@@ -22,12 +22,13 @@
     Modal,
     Row,
   } from "sveltestrap";
-  import Education from "../../lib/Components/ApplicationForm/Education.svelte";
-  import HealthInfo from "../../lib/Components/ApplicationForm/HealthInfo.svelte";
-  import PersonalInfo from "../../lib/Components/ApplicationForm/PersonalInfo.svelte";
-  import Document from "./Document.svelte";
-  import Overview from "./Overview.svelte";
-  import ProfileInfo from "./ProfileInfo.svelte";
+  import Education from "$lib/Components/ApplicationForm/Education.svelte";
+  import HealthInfo from "$lib/Components/ApplicationForm/HealthInfo.svelte";
+  import PersonalInfo from "$lib/Components/ApplicationForm/PersonalInfo.svelte";
+  import Document from "$lib/Components/Account/Document.svelte";
+  import Overview from "$lib/Components/Account/Overview.svelte";
+  import ProfileInfo from "$lib/Components/Account/ProfileInfo.svelte";
+  import { page } from "$app/stores";
 
   let profile: Profile = {
     id: "",
@@ -276,7 +277,7 @@
                 <ProfileInfo />
               </div>
               <div slot="id-2">
-                <Document />
+                <Document userId={$page.params?.id ?? $auth.cred?.id}/>
               </div>
             </Tabs>
           </div>

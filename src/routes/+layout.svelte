@@ -30,7 +30,7 @@
   $: {} 
   onMount(() => {
     setLocale();
-    if (browser && !publicRoutes.includes($page.url.pathname))
+    if (browser && !publicRoutes.includes($page.url.pathname) || slug == "program")
       Auth.queryPublic("refresh", {});
   });
 </script>
