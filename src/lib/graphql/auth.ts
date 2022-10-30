@@ -35,8 +35,8 @@ export const query = {
             }
         }`,
     verifyEmail: gql`
-        mutation($id: ID!, $code: String!){
-            verifyEmail(id:$id, code:$code) { 
+        mutation($id: ID!, $code: String!, $resend: Boolean!){
+            verifyEmail(id:$id, code:$code, resend:$resend) { 
                 id
                 role
                 email

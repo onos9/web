@@ -17,13 +17,13 @@
       code: code + lastDigit,
       resend,
     });
-    response = resp.data?.verifyEmail;
+    response = resp?.data?.verifyEmail;
     if (!!resp?.errors && resp?.errors[0].message?.includes("error:")) {
       error = resp?.errors[0].message;
     }
-
-    if (response?.role == "prospective") goto("/signup/program")
-    else goto("/login")
+    console.log(response);
+    if (response?.role == "prospective") goto("/signup/program");
+    else goto("/login");
   };
 
   const handleKeyup = ({ target }) => {
