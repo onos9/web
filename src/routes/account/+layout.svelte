@@ -66,6 +66,8 @@
   let ready = false;
   let isRef: boolean;
   let platform = "On-Campos";
+  let isCondition: boolean;
+  let isExp: boolean;
   $: platform = userdata?.platform;
 
   let titles: string[] = ["Bio Data", "Spirituality", "Health"];
@@ -91,6 +93,19 @@
     profile.id = $auth.cred?.id;
     profile.middleName = middleName;
     user.query("update", { data: profile });
+    if (isExp === false) {
+      console.log(Math.round(total.length / 100) * total.length);
+      profile.progress =
+        profile.progress + Math.round((total.length / 100) * total.length);
+    }
+    if (isCondition === false) {
+      console.log(Math.round(total.length / 100) * total.length);
+      profile.progress =
+        profile.progress + Math.round((total.length / 100) * total.length);
+      profile.progress =
+        profile.progress + Math.round((total.length / 100) * total.length);
+    }
+    console.log({ progress: profile.progress, isExp, isCondition });
 
     data.forEach(([key, value]) => {
       if (typeof val != "number" && !!value?.length) {
@@ -277,7 +292,7 @@
                 <ProfileInfo />
               </div>
               <div slot="id-2">
-                <Document userId={$page.params?.id ?? $auth.cred?.id}/>
+                <Document userId={$page.params?.id ?? $auth.cred?.id} />
               </div>
             </Tabs>
           </div>
@@ -310,9 +325,14 @@
       <div class="modal-body">
         <Wizard bind:nextTab bind:subscribemodal {complete} {titles}>
           <PersonalInfo bind:profile slot="slot1" />
-          <SpiritBackground bind:profile slot="slot2" />
+          <SpiritBackground bind:isExp bind:profile slot="slot2" />
 
-          <HealthInfo bind:platform bind:profile slot="slot3" />
+          <HealthInfo
+            bind:isCondition
+            bind:platform
+            bind:profile
+            slot="slot3"
+          />
         </Wizard>
       </div>
     </div>

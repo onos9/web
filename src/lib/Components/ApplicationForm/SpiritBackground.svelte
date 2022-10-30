@@ -3,7 +3,7 @@
   import type { Profile } from "$lib/interface/user_interface";
   import { slide } from "svelte/transition";
   export let profile: Profile;
-  let disabled: boolean;
+  export let isExp: boolean;
 
   $: if (profile.id) profile.godsWorkings = profile.godsWorkings ?? []
 </script>
@@ -20,20 +20,20 @@
           <Input
             name="sb"
             type="radio"
-            bind:group={disabled}
+            bind:group={isExp}
             value={true}
             label="Yes"
           />
           <Input
             name="sb"
             type="radio"
-            bind:group={disabled}
+            bind:group={isExp}
             value={false}
             label="No"
           />
         </FormGroup>
       </div>
-      {#if disabled}
+      {#if isExp}
         <p class="text-muted text-primary">
           Check any of the following experiences below that apply to you
         </p>
@@ -193,8 +193,7 @@
       </Row>
       <hr />
       <p class="text-muted mb-4">
-        Online Applicants should not have access to the health section of the
-        form
+        Ministry/Church Details
       </p>
       <Row>
         <Col lg="4">

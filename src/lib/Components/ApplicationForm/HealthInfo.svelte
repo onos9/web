@@ -5,7 +5,7 @@
   import { Col, Form, FormGroup, Input, Label, Row } from "sveltestrap";
   export let profile: Profile;
   export let platform;
-  let disabled: boolean;
+  export let isCondition: boolean;
 
   $: if (profile.id) profile.healthConditions = profile.healthConditions ?? []
 </script>
@@ -23,7 +23,7 @@
             id="r1"
             name="health"
             type="radio"
-            bind:group={disabled}
+            bind:group={isCondition}
             value={true}
             label="Yes"
           />
@@ -31,13 +31,13 @@
             id="r2"
             name="health"
             type="radio"
-            bind:group={disabled}
+            bind:group={isCondition}
             value={false}
             label="No"
           />
         </FormGroup>
       </div>
-      {#if disabled}
+      {#if isCondition}
         <p class="text-muted text-primary">
           Check any of the following experiences below that apply to you
         </p>

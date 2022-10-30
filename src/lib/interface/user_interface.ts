@@ -26,8 +26,8 @@ export interface Profile {
     reason: string
 
     // Health Information
-    healthConditions: string[]
-    healthIssueDescription: string
+    healthConditions?: string[]
+    healthIssueDescription?: string
 }
 
 export interface User {

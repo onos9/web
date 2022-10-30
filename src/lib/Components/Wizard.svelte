@@ -21,6 +21,7 @@
   let end: number = titles.length - 1;
   let previous: boolean = true;
   let next: boolean = false;
+  let submit: number = 0;
 
   $: previous = active == 0 ? true : false;
   $: next = active >= end ? complete : true;
@@ -150,11 +151,7 @@
                       on:click={() =>
                         toggleTab(next ? active + 1 : active, (nextTab = true))}
                     >
-                      {#if next}
-                        Next
-                      {:else}
-                        Submit
-                      {/if}
+                      Next
                     </Button>
                   </li>
                 </ul>
