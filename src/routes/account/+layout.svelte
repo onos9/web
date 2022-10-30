@@ -98,14 +98,13 @@
       profile.progress =
         profile.progress + Math.round((total.length / 100) * total.length);
     }
-    if (isCondition === false) {
+    if (isCondition === false || $userData.user?.platform == "Online") {
       console.log(Math.round(total.length / 100) * total.length);
       profile.progress =
         profile.progress + Math.round((total.length / 100) * total.length);
       profile.progress =
         profile.progress + Math.round((total.length / 100) * total.length);
     }
-    console.log({ progress: profile.progress, isExp, isCondition });
 
     data.forEach(([key, value]) => {
       if (typeof val != "number" && !!value?.length) {
@@ -117,7 +116,7 @@
     });
 
     complete = profile.progress >= 100 ? true : false;
-    // console.log(profile.progress);
+    console.log(profile.progress);
     nextTab = false;
   }
 

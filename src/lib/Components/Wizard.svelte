@@ -21,11 +21,12 @@
   let end: number = titles.length - 1;
   let previous: boolean = true;
   let next: boolean = false;
-  let submit: number = 0;
 
   $: previous = active == 0 ? true : false;
   $: next = active >= end ? complete : true;
 
+  $: if (complete) active = end;
+  
   const toggleTab = (tab: any, t: boolean = false) => {
     active = tab;
     nextTab = t;
