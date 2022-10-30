@@ -18,18 +18,19 @@
   export let subscribemodal: boolean;
 
   let active: number = 0;
-  let end: number = titles.length - 1;
+  let end: number = titles.length;
   let previous: boolean = true;
   let next: boolean = false;
 
   $: previous = active == 0 ? true : false;
-  $: next = active >= end ? complete : true;
+  $: next = active >= end ? complete : false;
 
-  $: if (complete) active = end;
 
   const toggleTab = (tab: any, t: boolean = false) => {
     active = tab;
     nextTab = t;
+    // active = complete ? active + 1 : active;
+    // console.log({end, active})
   };
 </script>
 
@@ -151,7 +152,10 @@
                       disabled={next}
                       color="primary"
                       on:click={() =>
-                        toggleTab(next ? active + 1 : active, (nextTab = true))}
+                        toggleTab(
+                          !next ? active + 1 : active,
+                          (nextTab = true)
+                        )}
                     >
                       Next
                     </Button>
