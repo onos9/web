@@ -154,7 +154,7 @@
             </li> -->
           </ul>
         </li>
-        {#if $auth.cred.role == "prospective"}
+        {#if $auth.cred.role != "prospective"}
           <li class={current == "user" ? "mm-active" : ""}>
             <a
               href=" "
