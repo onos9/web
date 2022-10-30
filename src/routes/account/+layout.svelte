@@ -61,7 +61,7 @@
   let nextTab = false;
   let complete: boolean;
   let userdata: any;
-  let active = 1;
+  let active = 0;
   let ready = false;
   let isRef: boolean;
   let platform = "On-Campos";
@@ -212,16 +212,18 @@
                         <p class="text-muted mb-0">Practicums</p>
                       </Col>
                     </Row>
-                    <div class="mt-4">
-                      <button
-                        type="button"
-                        class="btn btn-primary btn-sm"
-                        on:click={togglesubscribemodal}
-                      >
-                        Edit Profile
-                        <i class="mdi mdi-arrow-right ms-1" />
-                      </button>
-                    </div>
+                    {#if $userData.user?.role == "prospective"}
+                      <div class="mt-4">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm"
+                          on:click={togglesubscribemodal}
+                        >
+                          Edit Profile
+                          <i class="mdi mdi-arrow-right ms-1" />
+                        </button>
+                      </div>
+                    {/if}
                   </div>
                 </Col>
               </Row>

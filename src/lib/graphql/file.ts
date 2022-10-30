@@ -33,11 +33,10 @@ export const query = {
         }`,
 
     create: gql`
-        mutation($userId: ID!, $file: Upload!, $category: String! $title: String!){
+        mutation($userId: ID!, $file: Upload!, $category: String!){
             createFile(input: {
                 userId: $userId,
                 file: $file,
-                title: $title,
                 category:$category,
             }){
                 id

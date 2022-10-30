@@ -23,7 +23,6 @@
   let isOpen = false;
 
   let uploaded: any;
-  let title: string;
   let category: string;
   let loading: boolean;
 
@@ -43,10 +42,11 @@
     };
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     loading = true;
-    let payload = { userId: $auth.cred?.id, title, category, file: null };
-    file.query("create", payload, uploaded);
+    let payload = { userId: $auth.cred?.id, category, file: null };
+    const resp = await file.query("create", payload, uploaded);
+    if (!!resp?.data?.createFile) getDocuments();
     loading = false;
     isOpen = !isOpen;
   };

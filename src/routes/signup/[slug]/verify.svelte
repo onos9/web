@@ -8,16 +8,22 @@
   let count = 2;
   let code: string = "";
   let lastDigit: string = "";
+  let error: string;
   // $: console.log(code + lastDigit);
 
-  const handleClick = async () => {
+  const handleClick = async (resend: boolean) => {
     const resp = await Auth.queryPublic("verifyEmail", {
       id: response?.id,
       code: code + lastDigit,
+      resend,
     });
-
     response = resp.data?.verifyEmail;
-    if (!!response) goto("/signup/program");
+    if (!!resp?.errors && resp?.errors[0].message?.includes("error:")) {
+      error = resp?.errors[0].message;
+    }
+
+    if (response?.role == "prospective") goto("/signup/program")
+    else goto("/login")
   };
 
   const handleKeyup = ({ target }) => {
@@ -94,10 +100,22 @@
           </div>
         </div>
       </div>
+      {#if !!error}
+        <div class="row">
+          <div class="col-12">
+            <span class="text-danger">{error?.split(":")[1].trim()}</span>
+            <button
+              on:click={() => handleClick(true)}
+              type="button"
+              class="btn btn-link p-0">Resend code</button
+            >
+          </div>
+        </div>
+      {/if}
     </form>
 
     <div class="mt-4">
-      <button on:click={handleClick} class="btn btn-success w-md">
+      <button on:click={() => handleClick(false)} class="btn btn-success w-md">
         Confirm
       </button>
     </div>

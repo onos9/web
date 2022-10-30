@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { auth } from "$lib/helpers/store";
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
 
@@ -126,7 +127,7 @@
                 >{$_("menuitems.account.list.overview")}</a
               >
             </li>
-            <li>
+            <!-- <li>
               <a class="side-nav-link-ref" href="/account/profile"
                 >{$_("menuitems.account.list.profile")}</a
               >
@@ -150,63 +151,64 @@
               <a class="side-nav-link-ref" href="/account/settings"
                 >{$_("menuitems.account.list.settings")}</a
               >
-            </li>
+            </li> -->
           </ul>
         </li>
-
-        <li class={current == "user" ? "mm-active" : ""}>
-          <a
-            href=" "
-            class="waves-effect"
-            on:click={() => changeClassAttribute("user")}
-          >
-            <span class="badge rounded-pill bg-success float-end"
-              >{$_("menuitems.user.badge")}</span
+        {#if $auth.cred.role != "prospective"}
+          <li class={current == "user" ? "mm-active" : ""}>
+            <a
+              href=" "
+              class="waves-effect"
+              on:click={() => changeClassAttribute("user")}
             >
-            <i class="fas fa-users" />
-            <span>{$_("menuitems.user.text")}</span>
-          </a>
-          <ul
-            class="sub-menu mm-collapse {current === 'user' ? 'mm-show' : ''}"
-            aria-expanded="false"
-          >
-            <li>
-              <a class="side-nav-link-ref" href="/users"
-                >{$_("menuitems.user.list.users")}</a
+              <span class="badge rounded-pill bg-success float-end"
+                >{$_("menuitems.user.badge")}</span
               >
-            </li>
-            <li>
-              <a class="side-nav-link-ref" href="/users/prospectives"
-                >{$_("menuitems.user.list.prospectives")}</a
-              >
-            </li>
-            <li>
-              <a class="side-nav-link-ref" href="users/sudents"
-                >{$_("menuitems.user.list.sudents")}</a
-              >
-            </li>
-            <li>
-              <a class="side-nav-link-ref" href="/users/tutors"
-                >{$_("menuitems.user.list.tutors")}</a
-              >
-            </li>
-            <li>
-              <a class="side-nav-link-ref" href="users/partners"
-                >{$_("menuitems.user.list.partners")}</a
-              >
-            </li>
-            <li>
-              <a class="side-nav-link-ref" href="/users/Guests"
-                >{$_("menuitems.user.list.Guests")}</a
-              >
-            </li>
-            <li>
-              <a class="side-nav-link-ref" href="/users/administrators"
-                >{$_("menuitems.user.list.administrators")}</a
-              >
-            </li>
-          </ul>
-        </li>
+              <i class="fas fa-users" />
+              <span>{$_("menuitems.user.text")}</span>
+            </a>
+            <ul
+              class="sub-menu mm-collapse {current === 'user' ? 'mm-show' : ''}"
+              aria-expanded="false"
+            >
+              <li>
+                <a class="side-nav-link-ref" href="/users"
+                  >{$_("menuitems.user.list.users")}</a
+                >
+              </li>
+              <li>
+                <a class="side-nav-link-ref" href="/users/prospectives"
+                  >{$_("menuitems.user.list.prospectives")}</a
+                >
+              </li>
+              <li>
+                <a class="side-nav-link-ref" href="users/sudents"
+                  >{$_("menuitems.user.list.sudents")}</a
+                >
+              </li>
+              <li>
+                <a class="side-nav-link-ref" href="/users/tutors"
+                  >{$_("menuitems.user.list.tutors")}</a
+                >
+              </li>
+              <li>
+                <a class="side-nav-link-ref" href="users/partners"
+                  >{$_("menuitems.user.list.partners")}</a
+                >
+              </li>
+              <li>
+                <a class="side-nav-link-ref" href="/users/Guests"
+                  >{$_("menuitems.user.list.Guests")}</a
+                >
+              </li>
+              <li>
+                <a class="side-nav-link-ref" href="/users/administrators"
+                  >{$_("menuitems.user.list.administrators")}</a
+                >
+              </li>
+            </ul>
+          </li>
+        {/if}
 
         <!-- <li>
           <a class="side-nav-link-ref" href="calendar">

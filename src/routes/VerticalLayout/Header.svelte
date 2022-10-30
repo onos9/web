@@ -143,7 +143,7 @@
           {$_("navbar.dropdown.megamenu.text")}
           <i class="mdi mdi-chevron-down" />
         </DropdownToggle>
-        <DropdownMenu class="dropdown-menu dropdown-megamenu">
+        <!-- <DropdownMenu class="dropdown-menu dropdown-megamenu">
           <Row>
             <Col sm={8}>
               <Row>
@@ -383,14 +383,14 @@
               </Row>
             </Col>
           </Row>
-        </DropdownMenu>
+        </DropdownMenu> -->
       </Dropdown>
     </div>
 
     <div class="d-flex">
-      <LanguageDropdown />
+      <!-- <LanguageDropdown /> -->
 
-      <HeaderApp />
+      <!-- <HeaderApp /> -->
 
       <Dropdown class="d-none d-lg-inline-block ms-1">
         <button
@@ -403,12 +403,12 @@
         </button>
       </Dropdown>
 
-      <NotificationDropdown />
+      <!-- <NotificationDropdown /> -->
 
       <ProfileMenu {user}/>
 
       <div class="dropdown d-inline-block">
-        <RightsidebarButton bind:open={sidebar} />
+        <!-- <RightsidebarButton bind:open={sidebar} /> -->
       </div>
     </div>
   </div>
