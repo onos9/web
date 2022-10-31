@@ -15,8 +15,14 @@
 
   let email: string;
   let password: string;
+  let visible = false;
 
   $: if ($auth.loggedIn) goto("/", { replaceState: true });
+  $: if (visible) {
+    setTimeout(() => {
+      visible = false;
+    }, 3000);
+  }
 
   const handleLogin = () => Auth.queryPublic("signIn", { email, password });
 </script>
@@ -92,7 +98,7 @@
                   <Label class="form-label" for="password">Password</Label>
                   <div class="input-group auth-pass-inputgroup">
                     <Input
-                      type="password"
+                      type={visible ? "text" : "password"}
                       class="form-control"
                       id="password"
                       placeholder="Enter password"
@@ -100,7 +106,11 @@
                       aria-describedby="password-addon"
                       bind:value={password}
                     />
-                    <Button color="light" type="button" id="password-addon"
+                    <Button
+                      on:click={() => (visible = !visible)}
+                      color="light"
+                      type="button"
+                      id="password-addon"
                       ><i class="mdi mdi-eye-outline" /></Button
                     >
                   </div>
