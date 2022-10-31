@@ -111,7 +111,11 @@
                       color="light"
                       type="button"
                       id="password-addon"
-                      ><i class="mdi mdi-eye-outline" /></Button
+                      ><i
+                        class={visible
+                          ? "mdi mdi-eye-outline"
+                          : "mdi mdi-eye-off-outline"}
+                      /></Button
                     >
                   </div>
                 </div>
