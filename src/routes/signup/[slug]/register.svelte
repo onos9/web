@@ -2,9 +2,12 @@
   import { goto } from "$app/navigation";
   import Auth from "$lib/graphql/auth";
   import type { User } from "$lib/interface/user_interface";
+  import { Button, Input } from "sveltestrap";
   export let response: any;
   let loading = false;
   let isValid = true;
+  let visible = false;
+  let isExited = false;
   let regx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   let user: User = {
@@ -16,19 +19,25 @@
 
   const handleSubmit = async (e: any) => {
     isValid = !!user.email.toLowerCase().match(regx);
-    console.log(isValid);
     if (isValid) {
       loading = true;
       response = await Auth.queryPublic("signUp", user);
       loading = false;
-      response = response.data?.signUp;
+      console.log(response);
     }
     if (!!response?.errors && response?.errors[0]?.message.includes("E11000")) {
+      isExited = true;
       return;
     }
-
+    response = response.data?.signUp;
     if (!!response) goto("/signup/verify");
   };
+
+  $: if (visible) {
+    setTimeout(() => {
+      visible = false;
+    }, 3000);
+  }
 </script>
 
 <div>
@@ -40,6 +49,11 @@
     as Account Type in order to gain access to the Application form
   </p>
 </div>
+{#if isExited}
+  <p class="text-danger text-center">
+    An account with this email allready exist
+  </p>
+{/if}
 
 <div class="mt-4">
   <form
@@ -82,18 +96,29 @@
       <div class="invalid-feedback">Email address isValid</div>
     </div>
 
-    <div class="form-floating mb-3">
-      <input
-        type="password"
+    <div class="form-floating input-group mb-3">
+      <Input
+        type={visible ? "text" : "password"}
         class="form-control"
-        id="password"
+        id="userpassword"
         placeholder="Enter password"
         bind:value={user.password}
         required
       />
       <label for="userpassword" class="form-label">Password</label>
-      <div class="invalid-feedback">Please Enter Password</div>
+      <Button
+        class="input-group-text"
+        on:click={() => (visible = !visible)}
+        color="light"
+        type="button"
+      >
+        <i
+          class={visible ? "mdi mdi-eye-outline" : "mdi mdi-eye-off-outline"}
+        />
+      </Button>
     </div>
+
+    <!-- <div class="invalid-feedback">Please Enter Password</div> -->
 
     <div>
       <p class="mb-0">
