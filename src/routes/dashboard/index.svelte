@@ -10,6 +10,7 @@
     CardTitle,
     Modal,
     Input,
+    Alert,
   } from "sveltestrap";
 
   //import Charts
@@ -25,7 +26,9 @@
 
   //Import Breadcrumb
   import Breadcrumbs from "$lib/common/Breadcrumb.svelte";
-  import { userData } from "$lib/helpers/store";
+  import { auth, userData } from "$lib/helpers/store";
+  import { browser } from "$app/environment";
+  import user from "$lib/graphql/user";
 
   export let subscribemodal: boolean;
   let userdata: any;
@@ -47,16 +50,50 @@
     },
   ];
 
-  onMount(() => {
+  $: if ($userData.user.id) {
+    userdata = $userData.user;
     setTimeout(() => {
+      subscribemodal = userdata.progress >= 100 ? false : true;
+    }, 1000);
+  }
+
+  $: if (browser && !$userData.user?.id) getUserData($auth.cred?.id);
+
+  const getUserData = async (id: string) => {
+    const resp = await user.query("user", { id });
+    if (resp?.data?.user?.progress < 100) {
       subscribemodal = true;
-    }, 2000);
-  });
+    }
+  };
+
+  let alert = false;
+  const toggleRefereeModal = () => (isRef = !isRef);
 </script>
 
 <div class="page-content">
   <Container fluid>
     <Breadcrumbs title="Home" breadcrumbItem="Dashboard" />
+    {#if alert}
+      <div transition:slide={{ duration: 500 }}>
+        <Alert
+          color="info"
+          class="alert-dismissible fade show mb-4"
+          role="alert"
+        >
+          <div class="d-flex">
+            <i class="mdi mdi-alert-circle-outline me-2 fs-1" />
+            <p class="my-auto">
+              A maximum of two referees are reqiured, please click on
+              <button
+                on:click={toggleRefereeModal}
+                class="btn btn-link alert-link p-0">Add Referee</button
+              >
+              to add another referee in order to complete your Adullam Application
+            </p>
+          </div>
+        </Alert>
+      </div>
+    {/if}
     <Row>
       <Col xl="4">
         <WelcomeComp />

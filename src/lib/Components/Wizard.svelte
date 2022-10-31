@@ -24,13 +24,11 @@
 
   $: previous = active == 0 ? true : false;
   $: next = active >= end ? complete : false;
-
+  $: console.log(next);
 
   const toggleTab = (tab: any, t: boolean = false) => {
     active = tab;
     nextTab = t;
-    // active = complete ? active + 1 : active;
-    // console.log({end, active})
   };
 </script>
 

@@ -29,6 +29,7 @@
   import Overview from "$lib/Components/Account/Overview.svelte";
   import ProfileInfo from "$lib/Components/Account/ProfileInfo.svelte";
   import { page } from "$app/stores";
+  import referee from "$lib/graphql/referee";
 
   let profile: Profile = {
     id: "",
@@ -92,7 +93,7 @@
     profile.progress = Math.round((val.length / total.length) * 100);
     profile.id = $auth.cred?.id;
     profile.middleName = middleName;
-    user.query("update", { data: profile });
+
     if (isExp === false) {
       console.log(Math.round(total.length / 100) * total.length);
       profile.progress =
@@ -106,6 +107,8 @@
         profile.progress + Math.round((total.length / 100) * total.length);
     }
 
+    user.query("update", { data: profile });
+
     data.forEach(([key, value]) => {
       if (typeof val != "number" && !!value?.length) {
         userData.update((data) => ({
@@ -116,7 +119,6 @@
     });
 
     complete = profile.progress >= 100 ? true : false;
-    console.log(profile.progress);
     nextTab = false;
   }
 
@@ -130,7 +132,7 @@
     complete = profile.progress >= 100 ? true : false;
     subscribemodal = !complete;
     ready = true;
-    // console.log(profile);
+    console.log(profile.progress);
   }
 
   const togglesubscribemodal = () => (subscribemodal = !subscribemodal);
@@ -147,6 +149,8 @@
       subscribemodal = true;
     }
   };
+
+  const toggleRefereeModal = () => (isRef = !isRef);
 </script>
 
 {#if $userData.user?.id}
@@ -165,7 +169,7 @@
               <p class="my-auto">
                 A maximum of two referees are reqiured, please click on
                 <button
-                  on:click={() => (isRef = true)}
+                  on:click={toggleRefereeModal}
                   class="btn btn-link alert-link p-0">Add Referee</button
                 >
                 to add another referee in order to complete your Adullam Application

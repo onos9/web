@@ -5,7 +5,7 @@
   import { Col, Modal, Row, Table } from "sveltestrap";
   export let complete: boolean;
   export let alert: boolean;
-  export let isRef: boolean;
+  export let isRef = false;
 
   let fullName: string;
   let phone: string;
@@ -35,6 +35,7 @@
       });
       isFinished = true;
     }
+    isRef = false
   };
 
   const handleSubmit = async () => {
@@ -52,7 +53,6 @@
     loading = false;
     isOpen = false;
     fullName = phone = email = "";
-
     refs = data.referees;
   };
 
