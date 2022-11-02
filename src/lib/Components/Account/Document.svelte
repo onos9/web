@@ -54,7 +54,7 @@
   };
 
   $: if (!documents) getDocuments();
-  $: console.log(userId);
+  // $: console.log(userId);
 
   const fileIcons = {
     zip: "mdi mdi-folder-zip font-size-16 align-middle text-warning me-2",

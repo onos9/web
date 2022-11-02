@@ -23,7 +23,7 @@
       loading = true;
       response = await Auth.queryPublic("signUp", user);
       loading = false;
-      console.log(response);
+      // console.log(response);
     }
     if (!!response?.errors && response?.errors[0]?.message.includes("E11000")) {
       isExited = true;

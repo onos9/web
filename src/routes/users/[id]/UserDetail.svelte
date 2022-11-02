@@ -16,7 +16,8 @@
     CardBody,
     CardTitle,
     Col,
-    Container, Row
+    Container,
+    Row,
   } from "sveltestrap";
 
   let alert: false;
@@ -24,6 +25,7 @@
   let complete: boolean;
   let active = 0;
   let isRef: boolean;
+  let id: string;
 
   let menus: string[] = [
     // "Overview",
@@ -34,8 +36,9 @@
     // "Settings",
   ];
 
+  $: id = $page.params.id;
   const togglesubscribemodal = () => (subscribemodal = !subscribemodal);
-  $: if (browser) user.query("user", { id: $page.params.id });
+  $: if (browser && !$userData.user?.id && !!id) user.query("user", { id });
 </script>
 
 {#if $userData.user?.id}
@@ -180,7 +183,7 @@
                 <ProfileInfo />
               </div>
               <div slot="id-2">
-                <Document userId={$page.params?.id ?? $auth.cred?.id}/>
+                <Document userId={$page.params?.id ?? $auth.cred?.id} />
               </div>
             </Tabs>
           </div>

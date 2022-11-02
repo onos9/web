@@ -24,7 +24,7 @@
 
   $: previous = active == 0 ? true : false;
   $: next = active >= end ? complete : false;
-  $: console.log(next);
+  // $: console.log(next);
 
   const toggleTab = (tab: any, t: boolean = false) => {
     active = tab;
