@@ -68,16 +68,23 @@
 </script>
 
 <div>
-  <Row>
-    <Col lg={12}>
-      <div class="mb-4 float-end">
-        <button type="button" class="btn btn-primary btn-md" on:click={toggle}>
-          <i class="bx bx-plus ms-1" />
-          Add Document
-        </button>
-      </div>
-    </Col>
-  </Row>
+  {#if $auth.cred?.role == "prospective"}
+    <Row>
+      <Col lg={12}>
+        <div class="mb-4 float-end">
+          <button
+            type="button"
+            class="btn btn-primary btn-md"
+            on:click={toggle}
+          >
+            <i class="bx bx-plus ms-1" />
+            Add Document
+          </button>
+        </div>
+      </Col>
+    </Row>
+  {/if}
+
   {#if documents}
     <Row>
       <Col lg={12}>
