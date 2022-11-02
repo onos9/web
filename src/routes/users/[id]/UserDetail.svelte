@@ -75,7 +75,7 @@
                 <Col xs="7">
                   <div class="text-primary p-3">
                     <h5 class="text-primary">Welcome Back !</h5>
-                    <p>It will seem like simplified</p>
+                    <!-- <p>RCN Theological Seminary - Adullam</p> -->
                   </div>
                 </Col>
                 <Col xs="5" class="align-self-end">
@@ -111,12 +111,12 @@
                   <div class="pt-4">
                     <Row>
                       <Col xs="6">
-                        <h5 class="font-size-15">0</h5>
-                        <p class="text-muted mb-0">Courses</p>
+                        <h5 class="font-size-15 text-capitalize">{$userData.user?.program}</h5>
+                        <p class="text-muted mb-0">Program</p>
                       </Col>
                       <Col xs="6">
-                        <h5 class="font-size-15">0</h5>
-                        <p class="text-muted mb-0">Practicums</p>
+                        <h5 class="font-size-15">{$userData.user?.platform}</h5>
+                        <p class="text-muted mb-0">Platform</p>
                       </Col>
                     </Row>
                     {#if $auth.cred?.role == "prospective"}
