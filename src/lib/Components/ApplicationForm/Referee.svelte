@@ -35,7 +35,7 @@
       });
       isFinished = true;
     }
-    isRef = false
+    isRef = false;
   };
 
   const handleSubmit = async () => {
@@ -91,12 +91,18 @@
 
 <Row>
   <Col lg={12}>
-    <div class="mb-4 text-center">
-      <button type="button" class="btn btn-primary btn-sm" on:click={toggle}>
-        <i class="bx bx-plus ms-1" />
-        Add Referee
-      </button>
-    </div>
+    {#if $auth.cred?.role == "prospective"}
+      <div class="mb-4 text-center">
+        <button type="button" class="btn btn-primary btn-sm" on:click={toggle}>
+          <i class="bx bx-plus ms-1" />
+          Add Referee
+        </button>
+      </div>
+    {:else}
+      <div class="mb-4 text-center">
+        <p class="text-muted">No Referee Added</p>
+      </div>
+    {/if}
   </Col>
 </Row>
 

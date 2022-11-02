@@ -119,7 +119,7 @@
                         <p class="text-muted mb-0">Practicums</p>
                       </Col>
                     </Row>
-                    {#if $userData.user?.role == "prospective"}
+                    {#if $auth.cred?.role == "prospective"}
                       <div class="mt-4">
                         <button
                           type="button"
