@@ -76,7 +76,7 @@
                       </td>
                       <td>
                         <h5 class="font-size-14 mb-1">
-                          <a href={"/#"} class="text-dark">{user?.fullName}</a>
+                          <a href={`/users/${user?.id}`} class="text-dark">{user?.fullName}</a>
                         </h5>
                         <p class="text-muted mb-0">{user?.role}</p>
                       </td>
@@ -112,7 +112,7 @@
                             >
                           </li>
                           <li class="list-inline-item px-2">
-                            <a href={`users/${user?.id}`} title="Profile"
+                            <a href={`/users/${user?.id}`} title="Profile"
                               ><i class="bx bx-user-circle" /></a
                             >
                           </li>
