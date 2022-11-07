@@ -40,7 +40,7 @@ export interface User {
 export interface Student {
     id: string;
     program: string
-    schorlarshipReason: string
+    scholarshipReason: string
     platform: string
 }
 

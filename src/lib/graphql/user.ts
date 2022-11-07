@@ -15,6 +15,7 @@ export const query = {
                 avatarUrl
                 program
                 platform
+                scholarshipReason
             }
         }`,
 

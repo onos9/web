@@ -9,7 +9,7 @@
   let student: Student = {
     id: "",
     program: "Select Program Option",
-    schorlarshipReason: "",
+    scholarshipReason: "",
     platform: "Select Platform",
   };
   $: student.id = $auth.cred?.id;
@@ -19,7 +19,7 @@
     if (!!resp?.errors) {
       return;
     }
-
+    console.log(resp?.data);
     if (!!resp?.data) goto("/", { replaceState: true });
   };
 </script>
@@ -46,7 +46,7 @@
     <div class="mb-3">
       <label for="">Program Option</label>
       <select bind:value={student.program} class="form-select">
-        <option hidden >Select Program Option</option>
+        <option hidden>Select Program Option</option>
         <option value="diploma">Diploma in Theology</option>
         <option value="pgdt">Post Graduate Diploma in Theology</option>
       </select>
@@ -55,7 +55,7 @@
     <div class="mb-3">
       <label for="">Platform</label>
       <select bind:value={student.platform} class="form-select">
-        <option hidden >Select Platform</option>
+        <option hidden>Select Platform</option>
         <option>On-Campos</option>
         <option>Online</option>
       </select>
@@ -82,7 +82,7 @@
             class="form-control"
             rows="3"
             placeholder="Reason for Schorlarship"
-            bind:value={student.schorlarshipReason}
+            bind:value={student.scholarshipReason}
           />
           <label for="floatingInput">Reason for Schorlarship</label>
         </div>
@@ -90,7 +90,10 @@
     {/if}
 
     <div class="mt-4 d-grid">
-      <button type="submit" class="btn btn-primary w-md waves-effect waves-light">
+      <button
+        type="submit"
+        class="btn btn-primary w-md waves-effect waves-light"
+      >
         Submit
       </button>
     </div>

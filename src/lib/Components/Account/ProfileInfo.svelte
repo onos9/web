@@ -162,11 +162,28 @@
       <Col xs="12">
         <Card>
           <CardBody>
-            <CardTitle class="mb-4 h4">Reason for Applying</CardTitle
-            >
+            <CardTitle class="mb-4 h4">Reason for Applying</CardTitle>
             <p class="text-muted mb-4">
               {userdata?.reason}
             </p>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs="12">
+        <Card>
+          <CardBody>
+            <CardTitle class="mb-4 h4">Reason for Schorlarship</CardTitle>
+            {#if !!userdata?.scholarshipReason}
+              <p class="text-muted mb-4">
+                {userdata?.scholarshipReason}
+              </p>
+            {:else}
+              <p class="text-muted text-center mb-4">
+                No schorlarship request
+              </p>
+            {/if}
           </CardBody>
         </Card>
       </Col>

@@ -26,11 +26,14 @@
 
   const handleFilter = (filter: string) => {
     if (filter) {
+      console.log({ filter, data });
       data = $userData.users?.filter(
-        (d: any) => d?.program == filter || d?.platform == filter
+        (d: any) => d?.program == filter || d?.platform == filter || !!d[filter]
       );
+      console.log({ filter, data });
       return;
     }
+    // console.log({ filter, data });
     data = $userData.users;
   };
 
@@ -78,6 +81,12 @@
                         on:click|preventDefault={() => handleFilter("Online")}
                         class="dropdown-item"
                         href={""}>Online</a
+                      >
+                      <a
+                        on:click|preventDefault={() =>
+                          handleFilter("scholarshipReason")}
+                        class="dropdown-item"
+                        href={" "}>Schorlarship</a
                       >
                       <div class="dropdown-divider" />
                       <a
