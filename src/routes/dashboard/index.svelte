@@ -30,7 +30,7 @@
   import { browser } from "$app/environment";
   import user from "$lib/graphql/user";
 
-  export let subscribemodal: boolean;
+  let subscribemodal: boolean;
   let userdata: any;
   $: userdata = $userData.user;
 

@@ -13,6 +13,8 @@ export const query = {
                 phone
                 role
                 avatarUrl
+                program
+                platform
             }
         }`,
 

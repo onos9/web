@@ -24,13 +24,18 @@
     "/signup/program",
     "/signup/upload",
   ];
+
   let slug: string;
   $: slug = $page.params.slug;
 
-  $: {} 
+  $: {
+  }
   onMount(() => {
     setLocale();
-    if (browser && !publicRoutes.includes($page.url.pathname) || slug == "program")
+    if (
+      (browser && !publicRoutes.includes($page.url.pathname)) ||
+      slug == "program"
+    )
       Auth.queryPublic("refresh", {});
   });
 </script>

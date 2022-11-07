@@ -93,7 +93,7 @@
             <div class="d-flex flex-wrap">
               <h5 class="font-size-16 me-3">Documents</h5>
               <div class="ms-auto">
-                <Dropdown>
+                <Dropdown autoClose={true}>
                   <DropdownToggle
                     color=""
                     class="fw-medium text-reset text-muted dropdown-toggle"
@@ -130,40 +130,49 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {#each documents as recentfile}
+                  {#each documents as file}
                     <tr>
                       <td>
                         <a href={"#"} class="text-dark fw-medium">
                           <i
                             class={"bx bxs-file font-size-16 align-middle text-primary me-2"}
                           />
-                          {recentfile.filename}
+                          {file.filename}
                         </a>
                       </td>
-                      <td>{recentfile.category}</td>
-                      <td>{formatDate(recentfile.updatedAt)}</td>
-                      <td>{recentfile.size / 1000} KB</td>
+                      <td>{file.category}</td>
+                      <td>{formatDate(file.updatedAt)}</td>
+                      <td>{file.size / 1000} KB</td>
                       <td>
-                        <Dropdown>
+                        <!-- <Dropdown autoClose={true}>
                           <DropdownToggle
                             color=""
                             class="font-size-16 text-muted dropdown-toggle"
                             tag="a"
                           >
-                            <i class="mdi mdi-dots-horizontal" />
+                            <i class="bx bx-cloud-download" />
                           </DropdownToggle>
 
                           <DropdownMenu
-                            direction="right"
+                            direction="up"
                             class="dropdown-menu-end"
                           >
-                            <a class="dropdown-item" href={"#"}>Open</a>
+                            <a
+                              class="dropdown-item"
+                              href={`https://api.adullam.ng/download?id=${recentfile.id}`}
+                              >Download</a
+                            >
                             <a class="dropdown-item" href={"#"}>Edit</a>
                             <a class="dropdown-item" href={"#"}>Rename</a>
                             <div class="dropdown-divider" />
                             <a class="dropdown-item" href={"#"}>Remove</a>
                           </DropdownMenu>
-                        </Dropdown>
+                        </Dropdown> -->
+                        <a
+                          href={`http://localhost:8000/download?id=${file.id}`}
+                        >
+                          <i class="fs-4 bx bx-cloud-download" />
+                        </a>
                       </td>
                     </tr>
                   {/each}

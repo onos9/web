@@ -10,6 +10,9 @@
     CardBody,
     Col,
     Container,
+    Dropdown,
+    DropdownMenu,
+    DropdownToggle,
     Row,
     Table,
   } from "sveltestrap";
@@ -19,7 +22,17 @@
 
   $: if (browser && $auth.loggedIn) doRefresh($page.url);
   $: if (browser) data = $userData.users;
-  // $: console.log($page.url)
+  // $: console.log(data)
+
+  const handleFilter = (filter: string) => {
+    if (filter) {
+      data = $userData.users?.filter(
+        (d: any) => d?.program == filter || d?.platform == filter
+      );
+      return;
+    }
+    data = $userData.users;
+  };
 
   const doRefresh = (page: any) => user.query("users", {});
 </script>
@@ -32,14 +45,60 @@
         <Col lg="12">
           <Card>
             <CardBody>
+              <div class="d-flex flex-wrap">
+                <h5 class="font-size-16 me-3">Users</h5>
+                <div class="ms-auto">
+                  <Dropdown autoClose={true}>
+                    <DropdownToggle
+                      color=""
+                      class="fw-medium text-reset text-muted dropdown-toggle"
+                      tag="a"
+                    >
+                      <i class="bx bx-filter-alt" /> Filter
+                    </DropdownToggle>
+
+                    <DropdownMenu direction="right" class="dropdown-menu-end">
+                      <a
+                        on:click|preventDefault={() => handleFilter("pgdt")}
+                        class="dropdown-item"
+                        href={""}>PGDT</a
+                      >
+                      <a
+                        on:click|preventDefault={() => handleFilter("diploma")}
+                        class="dropdown-item"
+                        href={""}>Diploma</a
+                      >
+                      <a
+                        on:click|preventDefault={() =>
+                          handleFilter("On-Campos")}
+                        class="dropdown-item"
+                        href={""}>On-Campos</a
+                      >
+                      <a
+                        on:click|preventDefault={() => handleFilter("Online")}
+                        class="dropdown-item"
+                        href={""}>Online</a
+                      >
+                      <div class="dropdown-divider" />
+                      <a
+                        on:click|preventDefault={() => handleFilter("")}
+                        class="dropdown-item"
+                        href={""}>All</a
+                      >
+                    </DropdownMenu>
+                  </Dropdown>
+                </div>
+              </div>
+              <hr class="mt-2" />
               <Table class="align-middle table-nowrap table-hover">
                 <thead class="table-light">
                   <tr>
                     <th scope="col" style="width: 70px;">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Program</th>
+                    <th scope="col">Platform</th>
                     <th scope="col">Tags</th>
-                    <th scope="col">Courses</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -65,11 +124,15 @@
                       </td>
                       <td>
                         <h5 class="font-size-14 mb-1">
-                          <a href={`/users/${user?.id}`} class="text-dark">{user?.fullName}</a>
+                          <a href={`/users/${user?.id}`} class="text-dark"
+                            >{user?.fullName}</a
+                          >
                         </h5>
                         <p class="text-muted mb-0">{user?.role}</p>
                       </td>
                       <td>{user?.email}</td>
+                      <td>{user?.program}</td>
+                      <td>{user?.platform}</td>
                       <td>
                         <div>
                           {#each tags as tag, index}
@@ -92,7 +155,6 @@
                           {/if}
                         </div>
                       </td>
-                      <td> {0} </td>
                       <td>
                         <ul class="list-inline font-size-20 contact-as mb-0">
                           <li class="list-inline-item px-2">
