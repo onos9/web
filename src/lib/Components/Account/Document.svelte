@@ -170,7 +170,7 @@
                         </Dropdown> -->
 
                         <a
-                          href={`http://localhost:8000/download?id=${file.id}`}
+                          href={`https://api.adullam.ng/download?id=${file.id}`}
                         >
                           <i class="fs-4 bx bx-cloud-download" />
                         </a>

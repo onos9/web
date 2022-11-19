@@ -7,7 +7,7 @@
   <CardBody>
     <div class="d-flex">
       <img
-        src="assets/images/companies/img-1.png"
+        src="/assets/images/companies/img-1.png"
         alt=""
         class="avatar-sm me-4"
       />

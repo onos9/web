@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
+  import { browser } from "$app/environment";
+  import { onMount } from "svelte";
   import { Card, CardBody, CardTitle } from "sveltestrap";
-  import { chart } from "svelte-apexcharts";
+
+  let container: any;
   var options = {
     chart: {
       height: 290,
@@ -48,13 +51,22 @@
     },
     colors: ["#556ee6"],
   };
+
+  onMount(async () => {
+    if (browser) {
+      const ApexCharts = (await import("apexcharts")).default;
+      const chart = new ApexCharts(container, options);
+      chart.render();
+    }
+  });
 </script>
 
 <Card>
   <CardBody>
     <CardTitle class="mb-4">Overview</CardTitle>
     <div class="apex-charts">
-      <div use:chart={options} />
+      <!-- <div use:chart={options} /> -->
+      <div bind:this={container} />
     </div>
   </CardBody>
 </Card>

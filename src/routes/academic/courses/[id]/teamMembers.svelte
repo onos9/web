@@ -1,5 +1,4 @@
 <script>
-  import { a } from "svelte-routing";
   import { Card, CardBody, CardTitle, Table } from "sveltestrap";
   export let team;
 </script>
@@ -41,7 +40,7 @@
                 <div>
                   {#each member.skills as skill}
                     <a
-                      to="#"
+                      href={"#"}
                       class="badge bg-primary bg-soft text-primary font-size-11 me-1"
                     >
                       {skill.name}{" "}

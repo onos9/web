@@ -154,6 +154,53 @@
             </li> -->
           </ul>
         </li>
+        <li class={current == "courses" ? "mm-active" : ""}>
+          <a
+            href=" "
+            class="has-arrow waves-effect"
+            on:click={() => changeClassAttribute("courses")}
+          >
+            <i class="mdi mdi-library" />
+            <span>{$_("menuitems.academic.text")}</span>
+          </a>
+          <ul
+            class="sub-menu mm-collapse {current === 'courses'
+              ? 'mm-show'
+              : ''}"
+            aria-expanded="false"
+          >
+            <li>
+              <a class="side-nav-link-ref" href="/academic/courses"
+                >{$_("menuitems.academic.list.grid")}</a
+              >
+            </li>
+            <!-- <li>
+              <a class="side-nav-link-ref" href="/course/courses"
+                >{$_("menuitems.account.list.overview")}</a
+              >
+            </li> -->
+            <!-- <li>
+              <a class="side-nav-link-ref" href="/account/activity"
+                >{$_("menuitems.account.list.activity")}</a
+              >
+            </li> -->
+            <!-- <li>
+              <a class="side-nav-link-ref" href="task"
+                >{$_("menuitems.account.list.task")}</a
+              >
+            </li> -->
+            <!-- <li>
+              <a class="side-nav-link-ref" href="/account/practicum"
+                >{$_("menuitems.account.list.practicum")}</a
+              >
+            </li> -->
+            <!-- <li>
+              <a class="side-nav-link-ref" href="/account/settings"
+                >{$_("menuitems.account.list.settings")}</a
+              >
+            </li> -->
+          </ul>
+        </li>
         {#if $auth.cred.role != "prospective"}
           <li class={current == "user" ? "mm-active" : ""}>
             <a

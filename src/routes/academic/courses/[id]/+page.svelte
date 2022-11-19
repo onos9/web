@@ -5,14 +5,14 @@
   import ProjectDetail from "./projectDetail.svelte";
   import TeamMembers from "./teamMembers.svelte";
   import OverviewChart from "./overviewChart.svelte";
-  import data from "../../../lib/common/data/projects";
+  import data from "$lib/common/data/projects";
   import AttachedFiles from "./attachedFiles.svelte";
   import Comments from "./comments.svelte";
 </script>
 
 <div class="page-content">
   <Container fluid>
-    <Breadcrumb title="Projects" breadcrumbItem="Project Overview" />
+    <Breadcrumb title="Projects" breadcrumbItem="Course Overview" />
     <Row>
       <Col lg="8">
         <ProjectDetail project={data.projects[0]} />

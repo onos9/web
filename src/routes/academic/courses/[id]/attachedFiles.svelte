@@ -1,5 +1,4 @@
 <script>
-  import { a } from "svelte-routing";
   import { Card, CardBody, CardTitle, Table } from "sveltestrap";
   export let files;
 </script>
@@ -31,7 +30,7 @@
               </td>
               <td>
                 <div class="text-center">
-                  <a to={file.link} class="text-dark">
+                  <a href={file.link} class="text-dark">
                     <i class="bx bx-download h3 m-0" />
                   </a>
                 </div>

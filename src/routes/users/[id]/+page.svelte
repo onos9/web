@@ -33,7 +33,7 @@
   $: if (browser && $auth.loggedIn) doRefresh($page.url);
   $: if (browser)
     data = $userData.users?.filter((d: any) => d?.role == $page.params.id);
-  // $: console.log($page.params.id);
+  $: console.log($page.params.id);
 
   const handleFilter = (filter: string) => {
     if (filter) {

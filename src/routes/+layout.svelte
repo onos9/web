@@ -61,4 +61,9 @@
   .form-switch .form-check-input {
     width: 2.5em;
   }
+
+  .border-dashed {
+    border-style: dashed !important;
+    border-color: var(--kt-border-dashed-color);
+  }
 </style>

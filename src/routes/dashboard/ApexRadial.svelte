@@ -2,7 +2,7 @@
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
 
-  let container;
+  let container: any;
 
   const options = {
     chart: {

@@ -10,13 +10,13 @@ const projects = [
     commentsCount: 214,
     team: [
       {
-        id: 1, img: "assets/images/users/avatar-4.jpg", fullname: "Janice Cole", skills: [
+        id: 1, img: "/assets/images/users/avatar-4.jpg", fullname: "Janice Cole", skills: [
           { id: 1, name: "Frontend" },
           { id: 2, name: "UI" },
         ],
       },
       {
-        id: 2, img: "assets/images/users/avatar-5.jpg", fullname: "Steve Foster",
+        id: 2, img: "/assets/images/users/avatar-5.jpg", fullname: "Steve Foster",
         skills: [{ id: 1, name: "UI/UX" }],
       },
       {
@@ -24,7 +24,7 @@ const projects = [
         skills: [{ id: 1, name: "Backend" }],
       },
       {
-        id: 4, img: "assets/images/users/avatar-2.jpg", fullname: "Daniel Candles",
+        id: 4, img: "/assets/images/users/avatar-2.jpg", fullname: "Daniel Candles",
         skills: [
           { id: 1, name: "Frontend" },
           { id: 2, name: "UI" },
@@ -51,13 +51,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -81,8 +81,8 @@ const projects = [
     dueDate: "22 Oct, 19",
     commentsCount: 183,
     team: [
-      { id: 1, img: "assets/images/users/avatar-8.jpg" },
-      { id: 2, img: "assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" },
+      { id: 1, img: "/assets/images/users/avatar-8.jpg" },
+      { id: 2, img: "/assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" },
     ],
     startDate: "08 Sept, 2019",
     projectDetails: {
@@ -104,13 +104,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -135,7 +135,7 @@ const projects = [
     commentsCount: 175,
     team: [
       { id: 1, img: "Null", name: "K", color: "info", fullname: "Kony Brafford" },
-      { id: 2, img: "assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" }
+      { id: 2, img: "/assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" }
     ],
     startDate: "08 Sept, 2019",
     projectDetails: {
@@ -157,13 +157,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -187,7 +187,7 @@ const projects = [
     dueDate: "14 Oct, 19",
     commentsCount: 202,
     team: [
-      { id: 1, img: "assets/images/users/avatar-4.jpg", fullname: "Janice Cole" },
+      { id: 1, img: "/assets/images/users/avatar-4.jpg", fullname: "Janice Cole" },
     ],
     startDate: "08 Sept, 2019",
     projectDetails: {
@@ -209,13 +209,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -239,8 +239,8 @@ const projects = [
     dueDate: "13 Oct, 19",
     commentsCount: 194,
     team: [
-      { id: 1, img: "assets/images/users/avatar-1.jpg", fullname: "Jennifer Walker" },
-      { id: 2, img: "assets/images/users/avatar-3.jpg", fullname: "Daniel Candel" },
+      { id: 1, img: "/assets/images/users/avatar-1.jpg", fullname: "Jennifer Walker" },
+      { id: 2, img: "/assets/images/users/avatar-3.jpg", fullname: "Daniel Candel" },
       { id: 3, img: "Null", name: "3+", color: "danger" },
     ],
     startDate: "08 Sept, 2019",
@@ -263,13 +263,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -293,8 +293,8 @@ const projects = [
     dueDate: "24 Oct, 19",
     commentsCount: 222,
     team: [
-      { id: 1, img: "assets/images/users/avatar-4.jpg", fullname: "Janice Cole" },
-      { id: 2, img: "assets/images/users/avatar-5.jpg", fullname: "Steve Foster" },
+      { id: 1, img: "/assets/images/users/avatar-4.jpg", fullname: "Janice Cole" },
+      { id: 2, img: "/assets/images/users/avatar-5.jpg", fullname: "Steve Foster" },
     ],
     startDate: "08 Sept, 2019",
     projectDetails: {
@@ -316,13 +316,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -346,7 +346,7 @@ const projects = [
     dueDate: "15 Oct, 19",
     commentsCount: 214,
     team: [
-      { id: 1, img: "assets/images/users/avatar-5.jpg", fullname: "Steve Foster" },
+      { id: 1, img: "/assets/images/users/avatar-5.jpg", fullname: "Steve Foster" },
       { id: 3, img: "Null", name: "R", color: "warning", fullname: "Rony Candles" },
     ],
   },
@@ -361,7 +361,7 @@ const projects = [
     commentsCount: 185,
     team: [
       { id: 1, img: "Null", name: "L", color: "pink", fullname: "Lony Mackay" },
-      { id: 3, img: "assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" },
+      { id: 3, img: "/assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" },
     ],
     startDate: "08 Sept, 2019",
     projectDetails: {
@@ -383,13 +383,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",
@@ -413,10 +413,10 @@ const projects = [
     dueDate: "12 Oct, 19",
     commentsCount: 106,
     team: [
-      { id: 1, img: "assets/images/users/avatar-4.jpg", fullname: "Janice Cole" },
-      { id: 2, img: "assets/images/users/avatar-5.jpg", fullname: "Steve Foster" },
+      { id: 1, img: "/assets/images/users/avatar-4.jpg", fullname: "Janice Cole" },
+      { id: 2, img: "/assets/images/users/avatar-5.jpg", fullname: "Steve Foster" },
       { id: 3, img: "Null", name: "A", color: "success", fullname: "Aeffrey Walker" },
-      { id: 3, img: "assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" },
+      { id: 3, img: "/assets/images/users/avatar-2.jpg", fullname: "Daniel Candles" },
     ],
     startDate: "08 Sept, 2019",
     projectDetails: {
@@ -438,13 +438,13 @@ const projects = [
       {
         id: 1,
         username: "David Lambert",
-        userImg: "assets/images/users/avatar-2.jpg",
+        userImg: "/assets/images/users/avatar-2.jpg",
         comment: "Separate existence is a myth.",
       },
       {
         id: 2,
         username: "Steve Foster",
-        userImg: "assets/images/users/avatar-3.jpg",
+        userImg: "/assets/images/users/avatar-3.jpg",
         comment: "@Henry To an English person it will like simplified",
         reply: {
           username: "Jeffrey Walker",

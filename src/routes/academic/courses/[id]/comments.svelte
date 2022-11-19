@@ -1,7 +1,6 @@
 <script>
   import { Card, CardBody, CardTitle } from "sveltestrap";
   export let comments;
-  import { a } from "svelte-routing";
 </script>
 
 <Card>

@@ -199,11 +199,11 @@
         "invoicedetail": "Invoice Detail"
       }
     },
-    "projects": {
-      "text": "Courses",
+    "academic": {
+      "text": "Academic",
       "list": {
-        "grid": "Courses Grid",
-        "projectlist": "Courses List",
+        "grid": "My Courses",
+        "table": "All Courses",
         "overview": "Course Overview",
         "create": "Create New"
       }
