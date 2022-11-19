@@ -3,10 +3,10 @@
   import { page } from "$app/stores";
   import profileImg from "$lib/assets/images/profile-img.png";
   import Breadcrumb from "$lib/common/Breadcrumb.svelte";
-  import Document from "$lib/Components/Account/Document.svelte";
-  import ProfileInfo from "$lib/Components/Account/ProfileInfo.svelte";
-  import Referee from "$lib/Components/ApplicationForm/Referee.svelte";
-  import Tabs from "$lib/Components/Tabs.svelte";
+  import Document from "$lib/components/Account/Document.svelte";
+  import ProfileInfo from "$lib/components/Account/ProfileInfo.svelte";
+  import Referee from "$lib/components/ApplicationForm/Referee.svelte";
+  import Tabs from "$lib/components/Tabs.svelte";
   import user from "$lib/graphql/user";
   import { auth, userData } from "$lib/helpers/store";
   import { slide } from "svelte/transition";

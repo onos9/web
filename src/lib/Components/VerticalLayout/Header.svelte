@@ -11,11 +11,11 @@
 
   import { _ } from "svelte-i18n";
 
-  import LanguageDropdown from "../../lib/common/LanguageDropdown.svelte";
-  import HeaderApp from "../../lib/common/headerApp.svelte";
-  import NotificationDropdown from "../../lib/common/NotificationDropdown.svelte";
-  import ProfileMenu from "../../lib/common/ProfileMenu.svelte";
-  import RightsidebarButton from "../../lib/Components/RightsidebarButton.svelte";
+  import LanguageDropdown from "../../common/LanguageDropdown.svelte";
+  import HeaderApp from "../../common/headerApp.svelte";
+  import NotificationDropdown from "../../common/NotificationDropdown.svelte";
+  import ProfileMenu from "../../common/ProfileMenu.svelte";
+  import RightsidebarButton from "../RightsidebarButton.svelte";
   import { auth } from "$lib/helpers/store";
   // import logoLightSvg from "$lib/assets/images/logo-light.svg?raw";
   // import logoLightPng from "$lib/assets/images/logo-light.png";

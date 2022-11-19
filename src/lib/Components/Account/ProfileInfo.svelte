@@ -1,6 +1,6 @@
 <script lang="ts">
   import { browser } from "$app/environment";
-  import Info from "$lib/Components/Info.svelte";
+  import Info from "$lib/components/Info.svelte";
   import user from "$lib/graphql/user";
   import { auth, userData } from "$lib/helpers/store";
   import type { Profile } from "$lib/interface/user_interface";

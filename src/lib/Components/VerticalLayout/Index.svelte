@@ -2,7 +2,7 @@
   import Navbar from "./Navbar.svelte";
   import Header from "./Header.svelte";
   import Footer from "./Footer.svelte";
-  import Rightbar from "$lib/Components/Rightbar.svelte";
+  import Rightbar from "$lib/components/Rightbar.svelte";
   import {
     addMessages,
     dictionary,

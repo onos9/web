@@ -5,7 +5,7 @@
 
 {#each projects as project}
   <Col xl="4" sm="6">
-    <a href={`/courses/${project?.id}`}>
+    <a href={`/academic/courses/${project?.id}`}>
       <Card>
         <CardBody>
           <div class="d-flex">

@@ -12,7 +12,7 @@
   import { page } from "$app/stores";
   import Auth from "$lib/graphql/auth";
   import { auth } from "$lib/helpers/store";
-  import VerticalLayout from "../routes/VerticalLayout/Index.svelte";
+  import VerticalLayout from "$lib/components/VerticalLayout/Index.svelte";
   import { onMount } from "svelte";
   import { setLocale } from "$lib/helpers/i18n";
 

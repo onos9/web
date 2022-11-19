@@ -1,6 +1,6 @@
 <script>
   import { Col, Container, Row } from "sveltestrap";
-  import Breadcrumb from "../../../lib/common/Breadcrumb.svelte";
+  import Breadcrumb from "$lib/common/Breadcrumb.svelte";
 
   import ProjectDetail from "./projectDetail.svelte";
   import TeamMembers from "./teamMembers.svelte";

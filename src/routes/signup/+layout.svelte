@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CarouselPage from "$lib/Components/CarouselPage.svelte";
+  import CarouselPage from "$lib/components/CarouselPage.svelte";
   import { onMount } from "svelte";
   let ready = false;
   onMount(() => (ready = true));

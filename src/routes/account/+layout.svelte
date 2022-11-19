@@ -2,11 +2,11 @@
   import { browser } from "$app/environment";
   import profileImg from "$lib/assets/images/profile-img.png";
   import Breadcrumb from "$lib/common/Breadcrumb.svelte";
-  import Referee from "$lib/Components/ApplicationForm/Referee.svelte";
-  import SpiritBackground from "$lib/Components/ApplicationForm/SpiritBackground.svelte";
-  import MiniStats from "$lib/Components/MiniStats.svelte";
-  import Tabs from "$lib/Components/Tabs.svelte";
-  import Wizard from "$lib/Components/Wizard.svelte";
+  import Referee from "$lib/components/ApplicationForm/Referee.svelte";
+  import SpiritBackground from "$lib/components/ApplicationForm/SpiritBackground.svelte";
+  import MiniStats from "$lib/components/MiniStats.svelte";
+  import Tabs from "$lib/components/Tabs.svelte";
+  import Wizard from "$lib/components/Wizard.svelte";
   import user from "$lib/graphql/user";
   import { auth, userData } from "$lib/helpers/store";
   import type { Profile } from "$lib/interface/user_interface";
@@ -22,12 +22,12 @@
     Modal,
     Row,
   } from "sveltestrap";
-  import Education from "$lib/Components/ApplicationForm/Education.svelte";
-  import HealthInfo from "$lib/Components/ApplicationForm/HealthInfo.svelte";
-  import PersonalInfo from "$lib/Components/ApplicationForm/PersonalInfo.svelte";
-  import Document from "$lib/Components/Account/Document.svelte";
-  import Overview from "$lib/Components/Account/Overview.svelte";
-  import ProfileInfo from "$lib/Components/Account/ProfileInfo.svelte";
+  import Education from "$lib/components/ApplicationForm/Education.svelte";
+  import HealthInfo from "$lib/components/ApplicationForm/HealthInfo.svelte";
+  import PersonalInfo from "$lib/components/ApplicationForm/PersonalInfo.svelte";
+  import Document from "$lib/components/Account/Document.svelte";
+  import Overview from "$lib/components/Account/Overview.svelte";
+  import ProfileInfo from "$lib/components/Account/ProfileInfo.svelte";
   import { page } from "$app/stores";
   import referee from "$lib/graphql/referee";
 
