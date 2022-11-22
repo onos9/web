@@ -29,6 +29,7 @@
   import { auth, userData } from "$lib/helpers/store";
   import { browser } from "$app/environment";
   import user from "$lib/graphql/user";
+  import { slide } from "svelte/transition";
 
   let subscribemodal: boolean;
   let userdata: any;
