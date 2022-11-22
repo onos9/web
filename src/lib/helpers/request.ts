@@ -10,6 +10,8 @@ interface UserStore {
   users: []
 }
 
+let baseURL = import.meta.env.PROD ? 'https://api.adullam.ng/query' : 'http://localhost:8000/query'
+console.log(import.meta.env.VITE_API_URL)
 export const axiosPublic = axios.create({
   // baseURL: 'http://localhost:8000/query',
   baseURL: 'https://api.adullam.ng/query',
@@ -27,7 +29,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
   const { cred } = get(auth);
   // console.log(cred);
- 
+
   if (!cred.token) throw new Error('No Authorization token')
 
   config.headers = config.headers ?? {};
@@ -39,7 +41,7 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 
 instance.interceptors.response.use((response: AxiosResponse) => {
   const err = response?.data?.data?.errors
-  
+
   if (err && err?.message == "Token is expired") {
     console.log(err?.message)
   }

@@ -1,15 +1,38 @@
 <script>
-  import { Col, Container, Row } from "sveltestrap";
+  import {
+    Badge,
+    Card,
+    CardBody,
+    CardSubtitle,
+    CardTitle,
+    Col,
+    Container,
+    Row,
+  } from "sveltestrap";
   //Import Breadcrumb
   import Breadcrumb from "$lib/common/Breadcrumb.svelte";
   //Import Cards
   import CardProject from "./card-project.svelte";
   import data from "$lib/common/data/projects";
+  import Dountchart from "$lib/components/chartjs/dountchart.svelte";
 </script>
 
 <div class="page-content">
   <Container fluid>
     <Breadcrumb title="Projects" breadcrumbItem="Projects Grid" />
+    <Row>
+      <Col lg={4}>
+        <Card>
+          <CardBody>
+            <CardTitle class="fs-1">20</CardTitle>
+            <CardSubtitle class="mb-4 text-muted">Current Courses</CardSubtitle>
+            <div>
+              <Dountchart />
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
     <Row>
       <CardProject projects={data.projects} />
     </Row>

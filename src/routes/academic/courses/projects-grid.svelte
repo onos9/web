@@ -1,10 +1,11 @@
 <script>
-  import { Col, Container, Row } from "sveltestrap";
+  import { Card, CardBody, CardTitle, Col, Container, Row } from "sveltestrap";
   //Import Breadcrumb
-  import Breadcrumb from "../../lib/common/Breadcrumb.svelte";
+  import Breadcrumb from "$lib/common/Breadcrumb.svelte";
   //Import Cards
   import CardProject from "./card-project.svelte";
-  import data from "../../lib/common/data/projects";
+  import data from "$lib/common/data/projects";
+  import Dountchart from "$lib/components/chartjs/dountchart.svelte";
 </script>
 
 <div class="page-content">

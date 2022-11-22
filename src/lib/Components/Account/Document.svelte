@@ -169,16 +169,16 @@
                           </DropdownMenu>
                         </Dropdown> -->
 
+                        <!-- <a
+                          href={`https://localhost:8000/download?id=${file.id}`}
+                        >
+                          <i class="fs-4 bx bx-cloud-download" />
+                        </a> -->
                         <a
                           href={`https://api.adullam.ng/download?id=${file.id}`}
                         >
                           <i class="fs-4 bx bx-cloud-download" />
                         </a>
-                        <!-- <a
-                          href={`https://api.adullam.ng/download?id=${file.id}`}
-                        >
-                          <i class="fs-4 bx bx-cloud-download" />
-                        </a> -->
                       </td>
                     </tr>
                   {/each}
